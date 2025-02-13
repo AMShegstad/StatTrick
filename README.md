@@ -23,7 +23,7 @@
 <ul>
 <li>Alexander Shegstad - <a href="https://github.com/AMShegstad">Github</a> | <a href="https://www.linkedin.com/in/alexander-shegstad/">LinkedIn</a> | <a href="https://alexshegstad.netlify.app/">Portfolio</a></li>
 <li>David Vardanyan - <a href="https://github.com/dvard777">Github</a></li>
-<li>Isaac Najera - <a href="https://github.com/isaacenajera">Github</a><li>
+<li>Isaac Najera - <a href="https://github.com/isaacenajera">Github</a></li>
 <li>Devyn Johnson - <a href="https://github.com/DevynJohnson">Github</a> | <a href="https://www.linkedin.com/in/devyn-johnson-a5259213b">LinkedIn</a></li>
 </ul>
 
