@@ -10,8 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "express": "^4.21.2",
+    "postgres": "^3.4.5",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
