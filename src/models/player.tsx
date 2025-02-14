@@ -11,10 +11,7 @@ interface PlayerInfo {
 };
 
 
-
-interface PlayerCreation extends PlayerInfo {}
-
-export class Player extends Model<PlayerInfo, PlayerCreation> implements PlayerInfo {
+export class Player extends Model<PlayerInfo> implements PlayerInfo {
         public id!: number
         public position!: string;
         public playerName!: string;
@@ -57,11 +54,9 @@ export class Player extends Model<PlayerInfo, PlayerCreation> implements PlayerI
             },
         }, {
             sequelize,
-            timeStamps: false,
+            timestamps: false,
             underscored: false,
             modelName: 'Player',
         });
+        return Player;
     }
-
-    return Player;
-}
