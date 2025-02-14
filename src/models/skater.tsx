@@ -2,6 +2,7 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 
 interface SkaterInfo {
     id: number;
+    image: string;
     position: string;
     playerName: string;
     goals: number;
@@ -13,6 +14,7 @@ interface SkaterInfo {
 
 export class Skater extends Model<SkaterInfo> implements SkaterInfo {
         public id!: number
+        public image!: string;
         public position!: string;
         public playerName!: string;
         public goals!: number;
@@ -27,6 +29,10 @@ export class Skater extends Model<SkaterInfo> implements SkaterInfo {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
+            },
+            image: {
+                type: DataTypes.STRING,
+                allowNull: false,
             },
             position: {
                 type: DataTypes.STRING,
