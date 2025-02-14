@@ -180,7 +180,7 @@ const stLouisTeam = new Team({
 
 const utahTeam = new Team({
     city: 'Utah',
-    logo: "./public/NHL Logos/Utah.png",
+    logo: "./public/NHL Logos/Utah.svg",
     triCode: 'UTA',
     teamName: 'Utah Hockey Club',
     className: 'Utah',
