@@ -1,54 +1,54 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
-interface TeamInfo {
+interface GoalieInfo {
     id: number;
-    teamName: string;
-    wins: number;
-    losses: number;
-    overtimeLosses: number;
-    points: number;
-    gamesPlayed: number;
+    position: string;
+    playerName: string;
+    saves: number;
+    goalsAllowed: number;
+    savePercentage: number;
+    goalsAllowedAverage: number;
 };
 
 
-export class Team extends Model<TeamInfo> implements TeamInfo {
+export class Goalie extends Model<GoalieInfo> implements GoalieInfo {
         public id!: number
-        public teamName!: string;
-        public wins!: number;
-        public losses!: number;
-        public overtimeLosses!: number;
-        public points!: number;
-        public gamesPlayed!: number;
+        public position!: string;
+        public playerName!: string;
+        public saves!: number;
+        public goalsAllowed!: number;
+        public savePercentage!: number;
+        public goalsAllowedAverage!: number;
     }
 
-    export function TeamFactory(sequelize: Sequelize): typeof Team {
-        Team.init({
+    export function GoalieFactory(sequelize: Sequelize): typeof Goalie {
+        Goalie.init({
             
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
-            teamName: {
+            position: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            wins: {
+            playerName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            saves: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            losses: {
+            goalsAllowed: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            overtimeLosses: {
+            savePercentage: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            points: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            gamesPlayed: {
+            goalsAllowedAverage: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
@@ -56,7 +56,7 @@ export class Team extends Model<TeamInfo> implements TeamInfo {
             sequelize,
             timestamps: false,
             underscored: false,
-            modelName: 'Team',
+            modelName: 'Goalie',
         });
-        return Team;
+        return Goalie;
     }

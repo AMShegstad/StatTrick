@@ -1,6 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
-interface PlayerInfo {
+interface SkaterInfo {
     id: number;
     position: string;
     playerName: string;
@@ -11,7 +11,7 @@ interface PlayerInfo {
 };
 
 
-export class Player extends Model<PlayerInfo> implements PlayerInfo {
+export class Skater extends Model<SkaterInfo> implements SkaterInfo {
         public id!: number
         public position!: string;
         public playerName!: string;
@@ -21,8 +21,8 @@ export class Player extends Model<PlayerInfo> implements PlayerInfo {
         public plusMinus!: number;
     }
 
-    export function PlayerFactory(sequelize: Sequelize): typeof Player {
-        Player.init({
+    export function PlayerFactory(sequelize: Sequelize): typeof Skater {
+        Skater.init({
             
             id: {
                 type: DataTypes.INTEGER,
@@ -56,7 +56,7 @@ export class Player extends Model<PlayerInfo> implements PlayerInfo {
             sequelize,
             timestamps: false,
             underscored: false,
-            modelName: 'Player',
+            modelName: 'Skater',
         });
-        return Player;
+        return Skater;
     }
