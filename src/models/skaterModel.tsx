@@ -1,58 +1,52 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
-interface TeamInfo {
-    id?: number;
-    city: string;
-    logo: string;
-    teamName: string;
-    wins?: number;
-    losses?: number;
-    overtimeLosses?: number;
-    points?: number;
-    gamesPlayed?: number;
+export interface SkaterInfo {
+    id: number;
+    image: string;
+    position: string;
+    playerName: string;
+    goals: number;
+    assists: number;
+    points: number;
+    plusMinus: number;
 };
 
 
-export class Team extends Model<TeamInfo> implements TeamInfo {
+export class Skater extends Model<SkaterInfo> implements SkaterInfo {
         public id!: number
-        public city!: string;
-        public logo!: string;
-        public teamName!: string;
-        public wins!: number;
-        public losses!: number;
-        public overtimeLosses!: number;
+        public image!: string;
+        public position!: string;
+        public playerName!: string;
+        public goals!: number;
+        public assists!: number;
         public points!: number;
-        public gamesPlayed!: number;
+        public plusMinus!: number;
     }
 
-    export function TeamFactory(sequelize: Sequelize): typeof Team {
-        Team.init({
+    export function PlayerFactory(sequelize: Sequelize): typeof Skater {
+        Skater.init({
             
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
-            city: {
+            image: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            logo: {
+            position: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            teamName: {
+            playerName: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            wins: {
+            goals: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            losses: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-            },
-            overtimeLosses: {
+            assists: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
@@ -60,7 +54,7 @@ export class Team extends Model<TeamInfo> implements TeamInfo {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
-            gamesPlayed: {
+            plusMinus: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
@@ -68,7 +62,7 @@ export class Team extends Model<TeamInfo> implements TeamInfo {
             sequelize,
             timestamps: false,
             underscored: false,
-            modelName: 'Team',
+            modelName: 'Skater',
         });
-        return Team;
+        return Skater;
     }

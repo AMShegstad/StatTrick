@@ -1,6 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
-interface GoalieInfo {
+export interface GoalieInfo {
     id: number;
     image: string;
     position: string;
