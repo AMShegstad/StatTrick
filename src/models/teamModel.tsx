@@ -1,19 +1,27 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
-interface TeamInfo {
-    id: number;
+export interface TeamInfo {
+    id?: number; 
+    city: string;
+    logo: string;
+    triCode: string;
     teamName: string;
-    wins: number;
-    losses: number;
-    overtimeLosses: number;
-    points: number;
-    gamesPlayed: number;
+    className: string;
+    wins?: number;
+    losses?: number;
+    overtimeLosses?: number;
+    points?: number;
+    gamesPlayed?: number;
 };
 
 
 export class Team extends Model<TeamInfo> implements TeamInfo {
         public id!: number
+        public city!: string;
+        public logo!: string;
+        public triCode!: string;
         public teamName!: string;
+        public className!: string;
         public wins!: number;
         public losses!: number;
         public overtimeLosses!: number;
@@ -28,7 +36,23 @@ export class Team extends Model<TeamInfo> implements TeamInfo {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
+            city: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            logo: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            triCode: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
             teamName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            className: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
