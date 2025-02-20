@@ -2,9 +2,12 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export interface SkaterInfo {
     id: number;
-    image: string;
+    headshot: string;
     position: string;
-    playerName: string;
+    firstName: string;
+    lastName: string;
+    sweaterNumber: number;
+    positionCode: string;
     goals: number;
     assists: number;
     points: number;
@@ -14,9 +17,12 @@ export interface SkaterInfo {
 
 export class Skater extends Model<SkaterInfo> implements SkaterInfo {
         public id!: number
-        public image!: string;
+        public headshot!: string;
         public position!: string;
-        public playerName!: string;
+        public firstName!: string;
+        public lastName!: string;
+        public sweaterNumber!: number;
+        public positionCode!: string;
         public goals!: number;
         public assists!: number;
         public points!: number;
@@ -30,7 +36,7 @@ export class Skater extends Model<SkaterInfo> implements SkaterInfo {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
-            image: {
+            headshot: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
@@ -38,7 +44,19 @@ export class Skater extends Model<SkaterInfo> implements SkaterInfo {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            playerName: {
+            firstName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            lastName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            sweaterNumber: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            positionCode: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
