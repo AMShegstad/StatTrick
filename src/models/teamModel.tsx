@@ -12,6 +12,9 @@ export interface TeamInfo {
     overtimeLosses?: number;
     points?: number;
     gamesPlayed?: number;
+    conferenceName?: string;
+    divisionName?: string;
+    divisionSequence?: number;
 };
 
 
@@ -27,6 +30,9 @@ export class Team extends Model<TeamInfo> implements TeamInfo {
         public overtimeLosses!: number;
         public points!: number;
         public gamesPlayed!: number;
+        public conferenceName!: string;
+        public divisionName!: string;
+        public divisionSequence!: number
     }
 
     export function TeamFactory(sequelize: Sequelize): typeof Team {
@@ -73,6 +79,18 @@ export class Team extends Model<TeamInfo> implements TeamInfo {
                 allowNull: false,
             },
             gamesPlayed: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
+            conferenceName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            divisionName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            divisionSequence: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
             },
