@@ -7,6 +7,11 @@ export interface UserData {
     favoriteTeam: string;
 };
 
+export interface UserLogin {
+    username: string | null;
+    password: string | null;
+}
+
 export class User extends sequelize.Model<UserData> implements UserData {
     declare username: string;
     declare password: string;
