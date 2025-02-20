@@ -19,9 +19,12 @@ const fetchTeamData = async (team: Team, onDataFetched: (data: Team) => void) =>
                 overtimeLosses: teamDataFromApi.otLosses,
                 points: teamDataFromApi.points,
                 gamesPlayed: teamDataFromApi.gamesPlayed,
+                conferenceName: teamDataFromApi.conferenceName,
+                divisionName: teamDataFromApi.divisionName,
+                divisionSequence: teamDataFromApi.divisionSequence,
             });
 
-            onDataFetched(updatedTeamData);
+            onDataFetched(updatedTeamData); 
         }
     } catch (error) {
         console.error('Error fetching additional data:', error);
