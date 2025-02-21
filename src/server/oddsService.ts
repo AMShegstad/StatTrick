@@ -31,13 +31,13 @@ interface Outcome {
     constructor(
       home_team: string,
       away_team: string,
-      commence_time: string,
+      commence_time: Date,
       team1odds: number,
       team2odds: number
     ) {
       this.home_team = home_team;
       this.away_team = away_team;
-      this.commence_time = commence_time;
+      this.commence_time = commence_time.toLocaleString();
       this.team1odds = team1odds;
       this.team2odds = team2odds;
     }
@@ -88,7 +88,7 @@ interface Outcome {
           return new Odds(
               game.home_team, 
               game.away_team, 
-              game.commence_time, 
+              new Date(game.commence_time), 
               game.bookmakers[0].markets[0].outcomes[0].price, 
               game.bookmakers[0].markets[0].outcomes[1].price
           );  
