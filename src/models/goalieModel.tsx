@@ -2,11 +2,12 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export interface GoalieInfo {
     id: number;
-    image: string;
-    position: string;
+    headshot: string;
+    positionCode: string;
     firstName: string;
     lastName: string;
     teamAbbreviation: string;
+    sweaterNumber: number;
     saves: number;
     goalsAllowed: number;
     savePercentage: number;
@@ -16,11 +17,12 @@ export interface GoalieInfo {
 
 export class Goalie extends Model<GoalieInfo> implements GoalieInfo {
         public id!: number
-        public image!: string;
-        public position!: string;
+        public headshot!: string;
+        public positionCode!: string;
         public firstName!: string;
         public lastName!: string;
         public teamAbbreviation!: string
+        public sweaterNumber!: number;
         public saves!: number;
         public goalsAllowed!: number;
         public savePercentage!: number;
@@ -34,11 +36,11 @@ export class Goalie extends Model<GoalieInfo> implements GoalieInfo {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
             },
-            image: {
+            headshot: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            position: {
+            positionCode: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
@@ -52,6 +54,10 @@ export class Goalie extends Model<GoalieInfo> implements GoalieInfo {
             },
             teamAbbreviation: {
                 type: DataTypes.STRING,
+                allowNull: false,
+            },
+            sweaterNumber: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             saves: {

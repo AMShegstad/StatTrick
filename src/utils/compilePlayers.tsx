@@ -19,36 +19,36 @@ const fetchAndStoreRosters = async () => {
         for (const key in teams) {
             if (Object.prototype.hasOwnProperty.call(teams, key)) {
                 const team = teams[key as keyof typeof teams];
-                const response = await axios.get(`https://api-web.nhle.com/v1/roster/${team.triCode}/current`);
+                const response = await axios.get(`https://api-web.nhle.com/v1/club-stats/${team.triCode}/now`);
                 
                 const players = response.data.roster;
                 
+                
                 for (const player of players) {
-                    const { id, firstName, lastName } = player.person;
-                    const fullName = `${firstName.default} ${lastName.default}`;
                     
                     if (player.position.code === 'G') {
                         await Goalie.upsert({
-                            id: id,
-                            firstName: firstName,
-                            lastName: lastName,
+                            id: player.playerId,
+                            headshot: player.headshot,
+                            positionCode: player.position.code,
+                            firstName: player.firstName.default,
+                            lastName: player.lastName.default,
                             teamAbbreviation: team.triCode,
-                            position: player.position.code,
-                            image: player.person.image,
+                            sweaterNumber: player.jerseyNumber,
                             saves: player.stats.saves,
                             goalsAllowed: player.stats.goalsAllowed,
                             savePercentage: player.stats.savePercentage,
                             goalsAllowedAverage: player.stats.goalsAllowedAverage,
                         });
+
                     } else {
                         await Skater.upsert({
-                            id: id,
-                            firstName: fullName,
-                            lastName: lastName,
-                            teamAbbreviation: team.triCode,
-                            position: player.position.code,
+                            id: player.playerId,
+                            headshot: player.headshot,
                             positionCode: player.position.code,
-                            headshot: player.person.image,
+                            firstName: player.firstName.default,
+                            lastName: player.lastName.default,
+                            teamAbbreviation: team.triCode,
                             sweaterNumber: player.jerseyNumber,
                             points: player.stats.points,
                             goals: player.stats.goals,
