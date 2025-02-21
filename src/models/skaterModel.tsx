@@ -3,11 +3,11 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 export interface SkaterInfo {
     id: number;
     headshot: string;
-    position: string;
+    positionCode: string;
     firstName: string;
     lastName: string;
+    teamAbbreviation: string;
     sweaterNumber: number;
-    positionCode: string;
     goals: number;
     assists: number;
     points: number;
@@ -18,18 +18,18 @@ export interface SkaterInfo {
 export class Skater extends Model<SkaterInfo> implements SkaterInfo {
         public id!: number
         public headshot!: string;
-        public position!: string;
+        public positionCode!: string;
         public firstName!: string;
         public lastName!: string;
+        public teamAbbreviation!: string;
         public sweaterNumber!: number;
-        public positionCode!: string;
         public goals!: number;
         public assists!: number;
         public points!: number;
         public plusMinus!: number;
     }
 
-    export function PlayerFactory(sequelize: Sequelize): typeof Skater {
+    export function SkaterFactory(sequelize: Sequelize): typeof Skater {
         Skater.init({
             
             id: {
@@ -40,7 +40,7 @@ export class Skater extends Model<SkaterInfo> implements SkaterInfo {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            position: {
+            positionCode: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
@@ -52,12 +52,12 @@ export class Skater extends Model<SkaterInfo> implements SkaterInfo {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            sweaterNumber: {
-                type: DataTypes.INTEGER,
+            teamAbbreviation: {
+                type: DataTypes.STRING,
                 allowNull: false,
             },
-            positionCode: {
-                type: DataTypes.STRING,
+            sweaterNumber: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             goals: {
