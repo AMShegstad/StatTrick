@@ -31,7 +31,7 @@ interface Outcome {
     constructor(
       home_team: string,
       away_team: string,
-      commence_time: string,
+      commence_time: Date,
       team1odds: number,
       team2odds: number
     ) {
@@ -88,7 +88,7 @@ interface Outcome {
           return new Odds(
               game.home_team, 
               game.away_team, 
-              game.commence_time, 
+              new Date(game.commence_time), 
               game.bookmakers[0].markets[0].outcomes[0].price, 
               game.bookmakers[0].markets[0].outcomes[1].price
           );  
