@@ -4,7 +4,9 @@ export interface GoalieInfo {
     id: number;
     image: string;
     position: string;
-    playerName: string;
+    firstName: string;
+    lastName: string;
+    teamAbbreviation: string;
     saves: number;
     goalsAllowed: number;
     savePercentage: number;
@@ -16,7 +18,9 @@ export class Goalie extends Model<GoalieInfo> implements GoalieInfo {
         public id!: number
         public image!: string;
         public position!: string;
-        public playerName!: string;
+        public firstName!: string;
+        public lastName!: string;
+        public teamAbbreviation!: string
         public saves!: number;
         public goalsAllowed!: number;
         public savePercentage!: number;
@@ -38,7 +42,15 @@ export class Goalie extends Model<GoalieInfo> implements GoalieInfo {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            playerName: {
+            firstName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            lastName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            teamAbbreviation: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },

@@ -6,6 +6,7 @@ export interface SkaterInfo {
     position: string;
     firstName: string;
     lastName: string;
+    teamAbbreviation: string;
     sweaterNumber: number;
     positionCode: string;
     goals: number;
@@ -21,6 +22,7 @@ export class Skater extends Model<SkaterInfo> implements SkaterInfo {
         public position!: string;
         public firstName!: string;
         public lastName!: string;
+        public teamAbbreviation!: string;
         public sweaterNumber!: number;
         public positionCode!: string;
         public goals!: number;
@@ -29,7 +31,7 @@ export class Skater extends Model<SkaterInfo> implements SkaterInfo {
         public plusMinus!: number;
     }
 
-    export function PlayerFactory(sequelize: Sequelize): typeof Skater {
+    export function SkaterFactory(sequelize: Sequelize): typeof Skater {
         Skater.init({
             
             id: {
@@ -49,6 +51,10 @@ export class Skater extends Model<SkaterInfo> implements SkaterInfo {
                 allowNull: false,
             },
             lastName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            teamAbbreviation: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
