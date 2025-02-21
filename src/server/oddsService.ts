@@ -1,7 +1,6 @@
-//import path from "node:path";
-//import { fileURLToPath } from "node:url";
-//const __filename = fileURLToPath(import.meta.url);
-//const __dirname = path.dirname(__filename);
+import dotenv from "dotenv";
+import fetch from "node-fetch";
+dotenv.config();
 
 interface Outcome {
     price: number;
@@ -49,13 +48,29 @@ interface Outcome {
     static async getOdds(): Promise<Array<Odds>> {
       const oddsURL = `https://odds.p.rapidapi.com/v4/sports/icehockey_nhl/odds?regions=us&oddsFormat=american&dateFormat=iso`;
       //retrives odds for the next 8 games from the chosen sport, in our case, the National Hockey League.
+      /*
       try {
         const response = await fetch(oddsURL, {
           headers: {
+            "User-Agent": "VSCode/1.63.0",
+            "Accept": "application/json",
             "x-rapidapi-key": process.env.RAPIDAPI_KEY as string,
-            "x-rapidapi-host": "odds.p.rapidapi.com",
+            "x-rapidapi-host": process.env.RAPIDAPI_HOST as string,
+            "Host": process.env.HOST as string,
           },
         });
+        */
+
+        try {
+          const response = await fetch(oddsURL, {
+              headers: {
+                  "User-Agent": "VSCode/1.63.0",
+                  "Accept": "application/json",
+                  "x-rapidapi-key": "d818cb5b36mshc66975bd6b0c2c9p1a5e37jsn2e209b594a82", // Replace with your actual API key
+                  "x-rapidapi-host": "odds.p.rapidapi.com",
+                  "Host": "odds.p.rapidapi.com",
+              },
+          });
   
         // Handle potential errors.
         if (!response.ok) {
@@ -65,7 +80,7 @@ interface Outcome {
         }
   
         // Parse the JSON response.
-        const oddsData: Game[] = await response.json();
+        const oddsData: Game[] = await response.json() as Game[];
   
         // Create an object to store the odds. No need to store the entire response, only the data we need to present...
         const formattedOdds = oddsData.map((game) => {
