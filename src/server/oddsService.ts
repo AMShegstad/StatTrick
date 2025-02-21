@@ -37,7 +37,7 @@ interface Outcome {
     ) {
       this.home_team = home_team;
       this.away_team = away_team;
-      this.commence_time = commence_time;
+      this.commence_time = commence_time.toLocaleString();
       this.team1odds = team1odds;
       this.team2odds = team2odds;
     }
