@@ -48,19 +48,19 @@ interface Outcome {
     static async getOdds(): Promise<Array<Odds>> {
       const oddsURL = `https://odds.p.rapidapi.com/v4/sports/icehockey_nhl/odds?regions=us&oddsFormat=american&dateFormat=iso`;
       //retrives odds for the next 8 games from the chosen sport, in our case, the National Hockey League.
-      /*
+      
       try {
         const response = await fetch(oddsURL, {
           headers: {
             "User-Agent": "VSCode/1.63.0",
             "Accept": "application/json",
-            "x-rapidapi-key": process.env.RAPIDAPI_KEY as string,
-            "x-rapidapi-host": process.env.RAPIDAPI_HOST as string,
+            "X-Rapidapi-Key": process.env.RAPIDAPI_KEY as string,
+            "X-Rapidapi-Host": process.env.RAPIDAPI_HOST as string,
             "Host": process.env.HOST as string,
           },
         });
-        */
-
+        
+        /*
         try {
           const response = await fetch(oddsURL, {
               headers: {
@@ -71,7 +71,7 @@ interface Outcome {
                   "Host": "odds.p.rapidapi.com",
               },
           });
-  
+        */
         // Handle potential errors.
         if (!response.ok) {
           throw new Error(
