@@ -1,6 +1,6 @@
-CREATE DATABASE statTrick_db;
+CREATE DATABASE IF NOT EXISTS stattrick_db;
 
-\c statTrick_db;
+\c stattrick_db;
 
 CREATE TABLE userData (
     username VARCHAR(255) PRIMARY KEY,
