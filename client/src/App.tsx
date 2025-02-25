@@ -5,27 +5,25 @@ import Navbar from "react-bootstrap/Navbar";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+//import React from 'react';
 
 
 function App() {
   const [showStandings, setShowStandings] = useState(false);
   const [odds, setOdds] = useState([]);
-  const [showContent, setShowContent] = useState(true);
   const [showLogin, setShowLogin] = useState(true);
   const [showBettingOdds, setShowBettingOdds] = useState(false);
-
+  const [showContent, setShowContent] = useState(false);
   const [show, setShow] = useState(true);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const handleNavClick = () => {
     setShowStandings(false);
     setShowContent(false);
-    setShowLogin(false);
     setShowBettingOdds(false);
   };
 

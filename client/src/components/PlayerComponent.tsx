@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Player } from '../../../server/src/models/playerModel'; // Import the Player model
-import { teams } from '../../../server/src/classes/cities'; // Import teams object
+import { Player } from '../../../server/dist/models/player'; // Correct import path for Player model
+import { teams } from '../../../server/dist/classes/cities'; // Correct import path for teams object
 
 const fetchPlayerStats = async (teamAbbreviation: string, onStatsFetched: (data: Player) => void) => {
     const updateOrInsertPlayerData = async (playerData: Player) => {

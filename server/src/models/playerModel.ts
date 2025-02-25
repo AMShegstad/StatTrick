@@ -1,5 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { sequelize } from '../db/db';
+
 
 // Define the PlayerInfo interface using the statstics that are tracked between both skaters and goalies allowing null values for stats that are not applicable to all players
 

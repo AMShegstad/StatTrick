@@ -2,16 +2,18 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2022",
-    "lib": ["ES2023"],
+    "lib": ["dom", "es2015"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "outDir": "./dist",  // Specify an output folder for all emitted files.
+    "rootDir": "./src",  // Specify the root folder within your source files.
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    //"allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false,  // Allow emitting files
 
     /* Linting */
     "strict": true,
@@ -20,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["src"]
 }

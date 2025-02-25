@@ -1,0 +1,36 @@
+import { Team } from '../models/teamModel';
+
+export const teams: {
+    bostonTeam: Team;
+    buffaloTeam: Team;
+    detroitTeam: Team;
+    floridaTeam: Team;
+    montrealTeam: Team;
+    ottawaTeam: Team;
+    tampaBayTeam: Team;
+    torontoTeam: Team;
+    carolinaTeam: Team;
+    columbusTeam: Team;
+    newJerseyTeam: Team;
+    nyIslandersTeam: Team;
+    nyRangersTeam: Team;
+    philadelphiaTeam: Team;
+    pittsburghTeam: Team;
+    washingtonTeam: Team;
+    chicagoTeam: Team;
+    coloradoTeam: Team;
+    dallasTeam: Team;
+    minnesotaTeam: Team;
+    nashvilleTeam: Team;
+    stLouisTeam: Team;
+    utahTeam: Team;
+    winnipegTeam: Team;
+    anaheimTeam: Team;
+    calgaryTeam: Team;
+    edmontonTeam: Team;
+    losAngelesTeam: Team;
+    sanJoseTeam: Team;
+    seattleTeam: Team;
+    vancouverTeam: Team;
+    vegasTeam: Team;
+};

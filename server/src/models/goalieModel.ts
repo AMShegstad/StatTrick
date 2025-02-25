@@ -1,3 +1,4 @@
+/*
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export interface GoalieInfo {
@@ -84,3 +85,4 @@ export class Goalie extends Model<GoalieInfo> implements GoalieInfo {
         });
         return Goalie;
     }
+*/

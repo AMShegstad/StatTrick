@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from "@mui/material";
+import React from 'react';
 
 // Sample data structure (replace with API data when integrated)
 const mockStandings = [

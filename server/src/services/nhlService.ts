@@ -1,29 +1,14 @@
-import express, { Request, Response } from 'express';
-import { PlayerFactory } from '../../server/dist/models/player'; // Adjust the path to your player model
-import { Op } from 'sequelize'; // Import Sequelize operators
-import { sequelize } from './db/db';  // Import the sequelize instance
+import express from 'express';
+import { Request, Response } from 'express';
+import { Player } from '../models/playerModel';  // Import the Player model
+import { Op } from 'sequelize';
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Initialize the Player model
-const Player = PlayerFactory(sequelize);
-
-// Test database connection
-sequelize.authenticate()
-    .then(() => {
-        console.log('✅ Database connected successfully');
-    })
-    .catch((err) => {
-        console.error('❌ Database connection failed:', err);
-    });
+const router = express.Router();
 
 // API route to retrieve all players
-app.get('/players', async (req, res) => {
+router.get('/players', async (req: Request, res: Response) => {
     try {
+        console.log(req.method, req.url);
         const players = await Player.findAll();  // Retrieve all players from the database
         res.json(players);  // Return the players as JSON response
     } catch (error) {
@@ -33,7 +18,7 @@ app.get('/players', async (req, res) => {
 });
 
 // Route to fetch player data by playerID from the database
-app.get('/api/player/:id', async (req: Request, res: Response) => {
+router.get('/api/player/:id', async (req: Request, res: Response) => {
     const { playerID } = req.params;
 
     try {
@@ -53,7 +38,7 @@ app.get('/api/player/:id', async (req: Request, res: Response) => {
 });
 
 // Route to fetch top players for a specific team, this will be used to display top players for user's favorite team on the home page
-app.get('/api/team-top-players/:teamAbbreviation', async (req: Request, res: Response) => {
+router.get('/api/team-top-players/:teamAbbreviation', async (req: Request, res: Response) => {
     const { teamAbbreviation } = req.params;
 
     try {
@@ -86,7 +71,7 @@ app.get('/api/team-top-players/:teamAbbreviation', async (req: Request, res: Res
 });
 
 // Route to search for players by first name or last name
-app.get('/api/search-players', async (req: Request, res: Response) => {
+router.get('/api/search-players', async (req: Request, res: Response) => {
     const { query } = req.query;
 
     try {
@@ -107,8 +92,4 @@ app.get('/api/search-players', async (req: Request, res: Response) => {
     }
 });
 
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+export default router;

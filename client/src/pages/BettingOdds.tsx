@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from "@mui/material";
-import OddsService from "../server/oddsService";
+import React from 'react';
 
 const BettingOdds: React.FC = () => {
   // State to store betting odds data
@@ -9,13 +9,21 @@ const BettingOdds: React.FC = () => {
   useEffect(() => {
     // Fetch betting odds data
     const fetchOdds = async () => {
-      const odds = await OddsService.getOdds();
-      const formattedOdds = odds.map((odd) => ({
-        matchup: `${odd.home_team} vs ${odd.away_team}`,
-        home_odds: odd.home_odds,
-        away_odds: odd.away_odds,
-      }));
-      setBettingOdds(formattedOdds);
+      try {
+        const response = await fetch('/api/odds');
+        if (!response.ok) {
+          throw new Error('Failed to fetch odds');
+        }
+        const odds = await response.json();
+        const formattedOdds = odds.map((odd: any) => ({
+          matchup: `${odd.home_team} vs ${odd.away_team}`,
+          home_odds: odd.home_odds,
+          away_odds: odd.away_odds,
+        }));
+        setBettingOdds(formattedOdds);
+      } catch (error) {
+        console.error('Error fetching odds:', error);
+      }
     };
     fetchOdds();
   }, []);

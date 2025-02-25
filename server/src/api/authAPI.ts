@@ -1,6 +1,5 @@
-/*
-import type { UserLogin } from '../../../server/src/models/user';
-import Auth from '../../../server/src/utils/auth';
+import type { UserLogin } from '../models/user';
+import Auth from '../services/authService';
 
 const login = async (userInfo: UserLogin) => {
   try {
@@ -12,7 +11,7 @@ const login = async (userInfo: UserLogin) => {
       body: JSON.stringify(userInfo),
     });
 
-    const data = await response.json();
+    const data = await response.json() as { token: string; username: string; favoriteTeam: string };
 
     if (!response.ok) {
       throw new Error('User information not retrieved, check network tab!');
@@ -20,7 +19,7 @@ const login = async (userInfo: UserLogin) => {
 
     Auth.login(data.token);
 
-    return data;
+    return { username: data.username, favoriteTeam: data.favoriteTeam };
   } catch (err) {
     console.log('Error from user login: ', err);
     return Promise.reject('Could not fetch user info');
@@ -28,4 +27,3 @@ const login = async (userInfo: UserLogin) => {
 };
 
 export { login };
-*/

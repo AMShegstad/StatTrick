@@ -1,5 +1,4 @@
-/*
-import Auth from '../../../server/src/utils/auth';
+import Auth from '../services/authService';
 
 const retrieveUsers = async () => {
   try {
@@ -23,4 +22,3 @@ const retrieveUsers = async () => {
 };
 
 export { retrieveUsers };
-*/

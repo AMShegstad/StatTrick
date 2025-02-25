@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Team } from '../../../server/src/models/teamModel';
-import { teams } from '../../../server/src/classes/cities';
+import { Team } from '../../../server/dist/classes/cities';
+//import { cities } from '../../../server/dist/classes/cities';
 
 const fetchTeamData = async (team: Team, onDataFetched: (data: Team) => void) => {
     try {
@@ -40,7 +40,7 @@ const TeamComponent: React.FC<{ team: Team; onDataFetched: (data: Team) => void 
 };
 
 const App: React.FC = () => {
-    const nhlTeams = Object.values(teams);
+    const nhlTeams = Object.values(Team);
 
     const handleDataFetched = React.useCallback((data: Team) => {
         console.log('Fetched data:', data);
@@ -48,7 +48,7 @@ const App: React.FC = () => {
 
     return (
         <div>
-            {nhlTeams.map((team) => (
+            {nhlTeams.map((team: any) => (
                 <TeamComponent key={team.triCode} team={team} onDataFetched={handleDataFetched} />
             ))}
         </div>
