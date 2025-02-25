@@ -7,15 +7,17 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal"; 
 
 function App() {
   const [showStandings, setShowStandings] = useState(false);
   const [odds, setOdds] = useState([]);
   const [showContent, setShowContent] = useState(true);
-  const [showLogin, setShowLogin] = useState(true);
+  const [showLogin, setShowLogin] = useState(false); 
   const [showBettingOdds, setShowBettingOdds] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false); 
 
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -99,12 +101,41 @@ function App() {
             </Nav.Link>
           </Nav>
           <Nav className="ms-auto">
-            <Nav.Link href="#login">
+            <Nav.Link href="#login" onClick={handleShow}>
               <Button variant="outline-light">Login</Button>
             </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
+
+      {/* Modal for Login / Signup */}
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{isSignUp ? "Sign Up" : "Login"}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" />
+            </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            <Button variant="primary" type="submit" className="w-100">
+              {isSignUp ? "Sign Up" : "Login"}
+            </Button>
+          </Form>
+          <Button
+            variant="link"
+            onClick={() => setIsSignUp((prev) => !prev)}
+            className="mt-2 w-100"
+          >
+            {isSignUp ? "Already have an account? Login" : "Don't have an account? Sign Up"}
+          </Button>
+        </Modal.Body>
+      </Modal>
 
       {showContent && (
         <Container id="content" className="mt-5">
@@ -177,7 +208,6 @@ function App() {
           )}
         </Container>
       )}
-
     </>
   );
 }
