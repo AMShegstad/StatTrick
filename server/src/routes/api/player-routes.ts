@@ -1,16 +1,21 @@
-import { Player as PlayerModel } from '../src/models/playerModel'; // Adjust the path to your player model
+import { Player as PlayerModel } from '../../models/playerModel.js';
 import { Op } from 'sequelize'; // Import Sequelize operators
-import { sequelize } from '../db/db';  // Import the sequelize instance
 import express, { Request, Response } from 'express';  // Import express and its types
 
+const app = express();
+const router = express.Router();
+
+
+
 // API route to retrieve all players
-app.get('/players', async (req, res) => {
+app.get('/players', async (_req, res) => {
     try {
         const players = await PlayerModel.findAll();  // Retrieve all players from the database
         res.json(players);  // Return the players as JSON response
     } catch (error) {
         console.error('❌ Error retrieving players:', error);
         res.status(500).send('Error retrieving players');
+        return;
     }
 });
 
@@ -88,3 +93,5 @@ app.get('/api/search-players', async (req: Request, res: Response) => {
         res.status(500).send('Error searching for players');
     }
 });
+
+export { router as playerRoutes }

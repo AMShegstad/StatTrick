@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { teams } from '../classes/cities';
-import { Player } from '../models/playerModel';
+import { teams } from '../classes/cities.js';
+import { Player } from '../models/playerModel.js';
 import cron from 'node-cron';
 import dotenv from 'dotenv';
-import { sequelize }  from '../../db/db';
+import { sequelize }  from '../config/connection.js'
 
 dotenv.config();
 
