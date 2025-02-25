@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Team } from '../models/teamModel';
-import { teams } from '../classes/cities';
+import { Team } from '../../../server/src/models/teamModel';
+import { teams } from '../../../server/src/classes/cities';
 
 const fetchTeamData = async (team: Team, onDataFetched: (data: Team) => void) => {
     try {
