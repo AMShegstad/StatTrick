@@ -1,6 +1,5 @@
+import React from 'react';
 import { Card, ListGroup, Button } from 'react-bootstrap';
-
-// Styled PlayerCard component using React-Bootstrap
 import { FC } from 'react';
 
 interface Player {
