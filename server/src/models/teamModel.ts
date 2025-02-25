@@ -98,6 +98,7 @@ export class Team extends Model<TeamInfo> implements TeamInfo {
             sequelize,
             timestamps: false,
             underscored: false,
+            tableName: 'teams',
             modelName: 'Team',
         });
         return Team;
