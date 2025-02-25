@@ -1,4 +1,4 @@
-import { Team } from '../models/teamModel'; // Import Team class from teamModel.tsx
+import { Team } from '../models/teamModel.js'; // Import Team class from teamModel.tsx
 
 // Create new Team objects for each NHL team using all known team data, remaining keys will have values collected from API calls
 

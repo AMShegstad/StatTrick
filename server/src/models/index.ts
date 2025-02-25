@@ -1,21 +1,14 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import { sequelize } from '../config/connection.js';  // Import sequelize from connection.ts
+import { Player } from './playerModel.js';  // Import your models
 
-import { Sequelize } from 'sequelize';
-import { UserFactory } from './user';
-
-const sequelize = process.env.DB_URL
-  ? new Sequelize(process.env.DB_URL)
-  : new Sequelize(process.env.DB_NAME || '', process.env.DB_USER || '', process.env.DB_PASSWORD, {
-      host: 'localhost',
-      dialect: 'postgres',
-      dialectOptions: {
-        decimalNumbers: true,
-      },
+// Sync all models with the database
+sequelize.sync()
+    .then(() => {
+        console.log('✅ Database synced successfully');
+    })
+    .catch((err) => {
+        console.error('❌ Error syncing database:', err);
     });
 
-const User = UserFactory(sequelize);
-
-// Define relationships between models here
-
-export { sequelize, User, };
+// Export the models
+export { Player, sequelize };  // Export both sequelize and your models
