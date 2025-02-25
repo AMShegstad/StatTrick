@@ -7,13 +7,20 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
+    "server:dev": "nodemon --watch src/server/index",
+    "client:dev": "vite",
+    "start:prod": "concurrently \"npm run server:prod\" \"wait-on tcp:3001 && npm run client:prod\"",
+    "server:prod": "node src/server/index.ts",
+    "client:prod": "vite build && vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.4",
     "axios": "^1.7.9",
+    "concurrently": "^9.1.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jwt-decode": "^4.0.0",
@@ -21,15 +28,19 @@
     "node-fetch": "^3.3.2",
     "postgres": "^3.4.5",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
-    "sequelize": "^6.37.5"
+    "sequelize": "^6.37.5",
+    "wait-on": "^8.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
+    "@types/express": "^5.0.0",
     "@types/node-cron": "^3.0.11",
     "@types/pg": "^8.11.11",
     "@types/react": "^19.0.8",
+    "@types/react-bootstrap": "^0.32.37",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.19.0",

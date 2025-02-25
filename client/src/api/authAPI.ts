@@ -1,5 +1,5 @@
-import type { UserLogin } from '../models/user';
-import Auth from '../utils/auth';
+import type { UserLogin } from '../../../server/src/models/user';
+import Auth from '../../../server/src/utils/auth';
 
 const login = async (userInfo: UserLogin) => {
   try {
