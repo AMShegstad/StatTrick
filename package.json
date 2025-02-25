@@ -13,12 +13,14 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.4",
+    "bootstrap": "^5.3.3",
     "express": "^4.21.2",
     "postgres": "^3.4.5",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
-    "sequelize": "^6.37.5",
-    "react-router-dom": "^7.1.5"
+    "react-router-dom": "^7.1.5",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

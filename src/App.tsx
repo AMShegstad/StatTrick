@@ -6,9 +6,7 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-
+import Button from "react-bootstrap/Button";
 
 function App() {
   const [showStandings, setShowStandings] = useState(false);
@@ -56,7 +54,7 @@ function App() {
 
   // Function to convert decimal odds to American odds format
   function convertToAmericanOdds(decimalOdds: number): string {
-    if (decimalOdds >= 2.00) {
+    if (decimalOdds >= 2.0) {
       return `+${Math.round((decimalOdds - 1) * 100)}`;
     } else {
       return `${Math.round(-100 / (decimalOdds - 1))}`;
@@ -100,8 +98,23 @@ function App() {
               Betting Odds
             </Nav.Link>
           </Nav>
+          <Nav className="ms-auto">
+            <Nav.Link href="#login">
+              <Button variant="outline-light">Login</Button>
+            </Nav.Link>
+          </Nav>
         </Container>
       </Navbar>
+
+      {showContent && (
+        <Container id="content" className="mt-5">
+          <h2>Welcome to StatTrick</h2>
+          <p>
+            Track NHL player stats, team standings, and betting odds all in one
+            place.
+          </p>
+        </Container>
+      )}
 
       {showStandings && (
         <Container
@@ -165,44 +178,6 @@ function App() {
         </Container>
       )}
 
-      {showLogin && (
-        <>
-  
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Welcome to StatTrick</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="name@example.com"
-                  autoFocus
-                />
-              </Form.Group>
-              <Form.Group
-                className="mb-3"
-                controlId="exampleForm.ControlTextarea1"
-              >
-                <Form.Label>Example textarea</Form.Label>
-                <Form.Control as="textarea" rows={3} />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-        
-            </>
-      )}
     </>
   );
 }
