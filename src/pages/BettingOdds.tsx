@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react";
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from "@mui/material";
-
-// Sample data (replace with API data)
-const mockBettingOdds = [
-  { matchup: "Bruins vs Maple Leafs", oddsHome: "+120", oddsAway: "-150" },
-  { matchup: "Lightning vs Rangers", oddsHome: "-130", oddsAway: "+110" },
-  { matchup: "Avalanche vs Oilers", oddsHome: "+140", oddsAway: "-160" },
-];
+import OddsService from "../server/oddsService";
 
 const BettingOdds: React.FC = () => {
-  const [bettingOdds, setBettingOdds] = useState(mockBettingOdds);
+  // State to store betting odds data
+  const [bettingOdds, setBettingOdds] = useState<{ matchup: string; home_odds: number; away_odds: number }[]>([]);
 
   useEffect(() => {
-    // Replace with API call when backend is ready
-    // fetch("API_ENDPOINT").then((res) => res.json()).then((data) => setBettingOdds(data));
+    // Fetch betting odds data
+    const fetchOdds = async () => {
+      const odds = await OddsService.getOdds();
+      const formattedOdds = odds.map((odd) => ({
+        matchup: `${odd.home_team} vs ${odd.away_team}`,
+        home_odds: odd.home_odds,
+        away_odds: odd.away_odds,
+      }));
+      setBettingOdds(formattedOdds);
+    };
+    fetchOdds();
   }, []);
 
   return (
@@ -32,8 +36,8 @@ const BettingOdds: React.FC = () => {
             {bettingOdds.map((game, index) => (
               <TableRow key={index} hover>
                 <TableCell>{game.matchup}</TableCell>
-                <TableCell align="right">{game.oddsHome}</TableCell>
-                <TableCell align="right">{game.oddsAway}</TableCell>
+                <TableCell align="right">{game.home_odds}</TableCell>
+                <TableCell align="right">{game.away_odds}</TableCell>
               </TableRow>
             ))}
           </TableBody>
