@@ -51,5 +51,3 @@ CREATE TABLE IF NOT EXISTS teams (
     teamLogo VARCHAR(255), -- URL for the team's logo
     className VARCHAR(255) -- Class name for the team's logo
 );
-
-\i seeds.sql
