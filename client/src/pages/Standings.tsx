@@ -9,7 +9,7 @@ const mockStandings = [
 ];
 
 const Standings: React.FC = () => {
-  const [standings, setStandings] = useState(mockStandings);
+  const [standings] = useState(mockStandings);
 
   useEffect(() => {
     // Replace with API call when backend is ready

@@ -27,40 +27,37 @@ export function PlayerFactory(sequelize: Sequelize): typeof Player {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 allowNull: false,
-                field: 'playerID'
+                field: 'playerid', // Ensure this matches the actual column name in the database
             },
             firstName: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'firstName'
+                field: 'firstname', // Ensure this matches the actual column name in the database
             },
             lastName: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'lastName'
-            },
-            headshot: {
-                type: DataTypes.STRING,
-                allowNull: true,
+                field: 'lastname', // Ensure this matches the actual column name in the database
             },
             teamAbbreviation: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'teamAbbreviation',
-                references: {
-                    model: 'teams',  // Reference to 'Team' model
-                    key: 'triCode',
-                },
+                field: 'teamabbreviation', // Ensure this matches the actual column name in the database
             },
             positionCode: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'positionCode'
+                field: 'positioncode', // Ensure this matches the actual column name in the database
+            },
+            headshot: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                field: 'headshot', // Ensure this matches the actual column name in the database
             },
             sweaterNumber: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
-                field: 'sweaterNumber'
+                allowNull: true,
+                field: 'sweaternumber', // Ensure this matches the actual column name in the database
             },
         },
         {

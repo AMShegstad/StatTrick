@@ -27,5 +27,6 @@
     "noImplicitOverride": true /* Ensure overriding members in derived classes are marked with an override modifier. */,
     "useUnknownInCatchVariables": true /* Ensure 'unknown' is used for catch clause variables. */
   },
-  "outDir": "./dist" /* Redirect output structure to the directory. */
+  "outDir": "./dist" /* Redirect output structure to the directory. */,
+  "include": ["src", "express.d.ts"]
 }

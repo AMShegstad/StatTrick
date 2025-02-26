@@ -25,21 +25,21 @@ const fetchPlayerStats = async (teamAbbreviation: string, onStatsFetched: (data:
         for (const playerData of playersData) {
             // Create or update the Player instance based on the position and stats
             const updatedPlayerData = new Player();
-            updatedPlayerData.id = playerData.playerId;
+            //updatedPlayerData.id = playerData.playerId;
             updatedPlayerData.firstName = playerData.person?.firstName ?? '';
             updatedPlayerData.lastName = playerData.person?.lastName ?? '';
             updatedPlayerData.teamAbbreviation = team.triCode;
             updatedPlayerData.positionCode = playerData.position?.code ?? '';
             updatedPlayerData.headshot = playerData.person?.headshot ?? '';
             updatedPlayerData.sweaterNumber = playerData.jerseyNumber ?? null;
-            updatedPlayerData.points = playerData.stats?.points || 0;
-            updatedPlayerData.goals = playerData.stats?.goals || 0;
-            updatedPlayerData.assists = playerData.stats?.assists || 0;
-            updatedPlayerData.plusMinus = playerData.position?.code === 'G' ? null : playerData.stats?.plusMinus || 0; // Null for goalies
-            updatedPlayerData.saves = playerData.position?.code === 'G' ? playerData.stats?.saves || 0 : null; // Null for skaters
-            updatedPlayerData.goalsAllowed = playerData.position?.code === 'G' ? playerData.stats?.goalsAllowed || 0 : null; // Null for skaters
-            updatedPlayerData.savePercentage = playerData.position?.code === 'G' ? playerData.stats?.savePercentage || 0 : null; // Null for skaters
-            updatedPlayerData.goalsAgainstAverage = playerData.position?.code === 'G' ? playerData.stats?.goalsAgainstAverage || 0 : null; // Null for skaters
+           // updatedPlayerData.points = playerData.stats?.points || 0;
+            //updatedPlayerData.goals = playerData.stats?.goals || 0;
+            //updatedPlayerData.assists = playerData.stats?.assists || 0;
+            //updatedPlayerData.plusMinus = playerData.position?.code === 'G' ? null : playerData.stats?.plusMinus || 0; // Null for goalies
+            //updatedPlayerData.saves = playerData.position?.code === 'G' ? playerData.stats?.saves || 0 : null; // Null for skaters
+            //updatedPlayerData.goalsAllowed = playerData.position?.code === 'G' ? playerData.stats?.goalsAllowed || 0 : null; // Null for skaters
+            //updatedPlayerData.savePercentage = playerData.position?.code === 'G' ? playerData.stats?.savePercentage || 0 : null; // Null for skaters
+            //updatedPlayerData.goalsAgainstAverage = playerData.position?.code === 'G' ? playerData.stats?.goalsAgainstAverage || 0 : null; // Null for skaters
 
             // Call the callback function to update player stats
             onStatsFetched(updatedPlayerData);

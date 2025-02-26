@@ -43,6 +43,6 @@ async function fetchAndStoreRosters() {
   console.log('✅ All rosters have been fetched and stored.');
 }
 
-fetchAndStoreRosters();
+//fetchAndStoreRosters();
 
 export default fetchAndStoreRosters;

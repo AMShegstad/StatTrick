@@ -2,6 +2,7 @@ import { sequelize } from '../config/connection.js';
 import { UserFactory } from './userModel.js';
 import { PlayerFactory } from './playerModel.js';
 import { TeamFactory } from './teamModel.js';
+//import { UserFavorites } from './userFavoritesModel.js';
 
 const User = UserFactory(sequelize);
 const Player = PlayerFactory(sequelize);
@@ -29,6 +30,12 @@ Team.hasMany(Player, {
 Player.belongsTo(Team, { 
     foreignKey: 'teamAbbreviation', 
 });
+
+// Define associations
+
+//User.belongsToMany(Player, { through: UserFavorites, foreignKey: 'userID' });
+//Player.belongsToMany(User, { through: UserFavorites, foreignKey: 'playerID' });
+
 
 sequelize.sync()
     .then(() => console.log('✅ Models have been successfully synced.'))

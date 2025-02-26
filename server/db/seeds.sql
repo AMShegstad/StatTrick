@@ -1,5 +1,5 @@
 -- Corrected teams data
-INSERT INTO teams (triCode, city, teamName, teamLogo, className)
+INSERT INTO teams (tricode, city, teamname, teamlogo, classname)
 VALUES
   ('BOS', 'Boston', 'Boston Bruins', 'https://assets.nhle.com/logos/nhl/svg/BOS_light.svg', 'Boston'),
   ('BUF', 'Buffalo', 'Buffalo Sabres', 'https://assets.nhle.com/logos/nhl/svg/BUF_light.svg', 'Buffalo'),
@@ -33,3 +33,19 @@ VALUES
   ('SEA', 'Seattle', 'Seattle Kraken', 'https://assets.nhle.com/logos/nhl/svg/SEA_light.svg', 'Seattle'),
   ('VAN', 'Vancouver', 'Vancouver Canucks', 'https://assets.nhle.com/logos/nhl/svg/VAN_light.svg', 'Vancouver'),
   ('VGK', 'Vegas', 'Vegas Golden Knights', 'https://assets.nhle.com/logos/nhl/svg/VGK_light.svg', 'Vegas');
+
+-- Insert sample data into the teams table
+INSERT INTO teams (tricode, city, teamname, teamlogo, classname) VALUES
+('MIN', 'Minnesota', 'Wild', 'https://example.com/logos/min.png', 'wild-logo'),
+('CHI', 'Chicago', 'Blackhawks', 'https://example.com/logos/chi.png', 'blackhawks-logo'),
+('BOS', 'Boston', 'Bruins', 'https://example.com/logos/bos.png', 'bruins-logo');
+
+-- Insert sample data into the players table
+INSERT INTO players (playerid, firstname, lastname, teamabbreviation, positioncode, headshot, sweaternumber, points) VALUES
+(1, 'Player1', 'LastName1', 'MIN', 'F', 'https://example.com/headshots/player1.png', 9, 50),
+(2, 'Player2', 'LastName2', 'CHI', 'D', 'https://example.com/headshots/player2.png', 4, 30),
+(3, 'Player3', 'LastName3', 'BOS', 'G', 'https://example.com/headshots/player3.png', 30, 0);
+
+-- Insert sample data into the userData table
+INSERT INTO userData (username, email, favoriteTeam) VALUES
+('AlexShegstad', 'ettuShaggy@gmail.com', 'TOR');

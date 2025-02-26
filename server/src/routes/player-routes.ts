@@ -1,11 +1,8 @@
-import { Player } from '../../models/index.js'; // Import User and Player models
+import { Player } from '../models/index.js'; // Import User and Player models
 import { Op } from 'sequelize'; // Import Sequelize operators
-import express, { Request, Response } from 'express';  // Import express and its types
+import { Router, Request, Response } from 'express';  // Import express and its types
 
-const app = express();
-const router = express.Router();
-
-
+const router = Router();
 
 // API route to retrieve all players
 router.get('/players', async (_req, res) => {
@@ -18,9 +15,8 @@ router.get('/players', async (_req, res) => {
     }
 });
 
-
 // Route to fetch top players for a specific team, this will be used to display top players for user's favorite team on the home page
-app.get('/api/team-top-players/:teamAbbreviation', async (req: Request, res: Response) => {
+router.get('/team-top-players/:teamAbbreviation', async (req: Request, res: Response) => {
     const { teamAbbreviation } = req.params;
 
     try {
@@ -53,7 +49,7 @@ app.get('/api/team-top-players/:teamAbbreviation', async (req: Request, res: Res
 });
 
 // Route to search for players by first name or last name
-app.get('/api/search-players', async (req: Request, res: Response) => {
+router.get('/search-players', async (req: Request, res: Response) => {
     const { query } = req.query;
 
     try {
@@ -74,4 +70,4 @@ app.get('/api/search-players', async (req: Request, res: Response) => {
     }
 });
 
-export { router as playerRoutes }
+export { router as playerRoutes };
