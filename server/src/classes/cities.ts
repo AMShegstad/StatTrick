@@ -1,10 +1,10 @@
-import { Team } from '../models/teamModel.js'; // Import Team class from teamModel.tsx
+import { Team } from '../models/index.js'; // Import Team class from teamModel.tsx
 
 // Create new Team objects for each NHL team using all known team data, remaining keys will have values collected from API calls
 
 const bostonTeam = new Team({
     city: 'Boston',
-    logo: "./public/NHL Logos/Boston.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/BOS_light.svg",
     triCode: 'BOS',
     teamName: 'Boston Bruins',
     className: 'Boston',
@@ -12,7 +12,7 @@ const bostonTeam = new Team({
 
 const buffaloTeam = new Team({
     city: 'Buffalo',
-    logo: "./public/NHL Logos/Buffalo.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/BUF_light.svg",
     triCode: 'BUF',
     teamName: 'Buffalo Sabres',
     className: 'Buffalo',
@@ -20,7 +20,7 @@ const buffaloTeam = new Team({
 
 const detroitTeam = new Team({
     city: 'Detroit',
-    logo: "./public/NHL Logos/Detroit.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/DET_light.svg",
     triCode: 'DET',
     teamName: 'Detroit Red Wings',
     className: 'Detroit',
@@ -28,7 +28,7 @@ const detroitTeam = new Team({
 
 const floridaTeam = new Team({
     city: 'Florida',
-    logo: "./public/NHL Logos/Florida.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/FLA_light.svg",
     triCode: 'FLA',
     teamName: 'Florida Panthers',
     className: 'Florida',
@@ -36,7 +36,7 @@ const floridaTeam = new Team({
 
 const montrealTeam = new Team({
     city: 'Montreal',
-    logo: "./public/NHL Logos/Montreal.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/MTL_light.svg",
     triCode: 'MTL',
     teamName: 'Montreal Canadiens',
     className: 'Montreal',
@@ -44,7 +44,7 @@ const montrealTeam = new Team({
 
 const ottawaTeam = new Team({
     city: 'Ottawa',
-    logo: "./public/NHL Logos/Ottawa.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/OTT_light.svg",
     triCode: 'OTT',
     teamName: 'Ottowa Senators',
     className: 'Ottawa',
@@ -52,7 +52,7 @@ const ottawaTeam = new Team({
 
 const tampaBayTeam = new Team({
     city: 'Tampa Bay',
-    logo: "./public/NHL Logos/TampaBay.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/TBL_light.svg",
     triCode: 'TBL',
     teamName: 'Tampa Bay Lightning',
     className: 'TampaBay',
@@ -60,7 +60,7 @@ const tampaBayTeam = new Team({
 
 const torontoTeam = new Team({
     city: 'Toronto',
-    logo: "./public/NHL Logos/Toronto.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/TOR_light.svg",
     triCode: 'TOR',
     teamName: 'Toronto Maple Leafs',
     className: 'Toronto',
@@ -68,7 +68,7 @@ const torontoTeam = new Team({
 
 const carolinaTeam = new Team({
     city: 'Carolina',
-    logo: "./public/NHL Logos/Carolina.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/CAR_light.svg",
     triCode: 'CAR',
     teamName: 'Carolina Hurricanes',
     className: 'Carolina',
@@ -76,7 +76,7 @@ const carolinaTeam = new Team({
 
 const columbusTeam = new Team({
     city: 'Columbus',
-    logo: "./public/NHL Logos/Columbus.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg",
     triCode: 'CBJ',
     teamName: 'Columbus Blue Jackets',
     className: 'Columbus',
@@ -84,7 +84,7 @@ const columbusTeam = new Team({
 
 const newJerseyTeam = new Team({
     city: 'New Jersey',
-    logo: "./public/NHL Logos/NewJersey.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/NJD_light.svg",
     triCode: 'NJD',
     teamName: 'New Jersey Devils',
     className: 'NewJersey',
@@ -92,7 +92,7 @@ const newJerseyTeam = new Team({
 
 const nyIslandersTeam = new Team({
     city: 'NY Islanders',
-    logo: "./public/NHL Logos/NYIslanders.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/NYI_light.svg",
     triCode: 'NYI',
     teamName: 'New York Islanders',
     className: 'NewYorkI',
@@ -100,7 +100,7 @@ const nyIslandersTeam = new Team({
 
 const nyRangersTeam = new Team({
     city: 'NY Rangers',
-    logo: "./public/NHL Logos/NYRangers.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/NYR_light.svg",
     triCode: 'NYR',
     teamName: 'New York Rangers',
     className: 'NewYorkR',
@@ -108,7 +108,7 @@ const nyRangersTeam = new Team({
 
 const philadelphiaTeam = new Team({
     city: 'Philadelphia',
-    logo: "./public/NHL Logos/Philadelphia.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/PHI_light.svg",
     triCode: 'PHI',
     teamName: 'Philadelphia Flyers',
     className: 'Philadelphia',
@@ -116,7 +116,7 @@ const philadelphiaTeam = new Team({
 
 const pittsburghTeam = new Team({
     city: 'Pittsburgh',
-    logo: "./public/NHL Logos/Pittsburgh.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/PIT_light.svg",
     triCode: 'PIT',
     teamName: 'Pittsburg Penguins',
     className: 'Pittsburgh',
@@ -124,7 +124,7 @@ const pittsburghTeam = new Team({
 
 const washingtonTeam = new Team({
     city: 'Washington',
-    logo: "./public/NHL Logos/Washington.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/WSH_secondary_light.svg",
     triCode: 'WSH',
     teamName: 'Washington Capitals',
     className: 'Washington',
@@ -132,7 +132,7 @@ const washingtonTeam = new Team({
 
 const chicagoTeam = new Team({
     city: 'Chicago',
-    logo: "./public/NHL Logos/Chicago.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/CHI_light.svg",
     triCode: 'CHI',
     teamName: 'Chicago Blackhawks',
     className: 'Chicago',
@@ -140,7 +140,7 @@ const chicagoTeam = new Team({
 
 const coloradoTeam = new Team({
     city: 'Colorado',
-    logo: "./public/NHL Logos/Colorado.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/COL_light.svg",
     triCode: 'COL',
     teamName: 'Colorado Avalanche',
     className: 'Colorado',
@@ -148,7 +148,7 @@ const coloradoTeam = new Team({
 
 const dallasTeam = new Team({
     city: 'Dallas',
-    logo: "./public/NHL Logos/Dallas.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/DAL_light.svg",
     triCode: 'DAL',
     teamName: 'Dallas Stars',
     className: 'Dallas',
@@ -156,7 +156,7 @@ const dallasTeam = new Team({
 
 const minnesotaTeam = new Team({
     city: 'Minnesota',
-    logo: "./public/NHL Logos/Minnesota.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/MIN_light.svg",
     triCode: 'MIN',
     teamName: 'Minnesota Wild',
     className: 'Minnesota',
@@ -164,7 +164,7 @@ const minnesotaTeam = new Team({
 
 const nashvilleTeam = new Team({
     city: 'Nashville',
-    logo: "./public/NHL Logos/Nashville.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/NSH_light.svg",
     triCode: 'NSH',
     teamName: 'Nashville Predators',
     className: 'Nashville',
@@ -172,7 +172,7 @@ const nashvilleTeam = new Team({
 
 const stLouisTeam = new Team({
     city: 'St. Louis',
-    logo: "./public/NHL Logos/StLouis.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/STL_light.svg",
     triCode: 'STL',
     teamName: 'St. Louis Blues',
     className: 'StLouis',
@@ -180,7 +180,7 @@ const stLouisTeam = new Team({
 
 const utahTeam = new Team({
     city: 'Utah',
-    logo: "./public/NHL Logos/Utah.svg",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/UTA_light.svg",
     triCode: 'UTA',
     teamName: 'Utah Hockey Club',
     className: 'Utah',
@@ -188,7 +188,7 @@ const utahTeam = new Team({
 
 const winnipegTeam = new Team({
     city: 'Winnipeg',
-    logo: "./public/NHL Logos/Winnipeg2.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/WPG_light.svg",
     triCode: 'WPG',
     teamName: 'Winnipeg Jets',
     className: 'Winnipeg',
@@ -196,7 +196,7 @@ const winnipegTeam = new Team({
 
 const anaheimTeam = new Team({
     city: 'Anaheim',
-    logo: "./public/NHL Logos/Anaheim.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/ANA_light.svg",
     triCode: 'ANA',
     teamName: 'Anaheim Ducks',
     className: 'Anaheim',
@@ -204,7 +204,7 @@ const anaheimTeam = new Team({
 
 const calgaryTeam = new Team({
     city: 'Calgary',
-    logo: "./public/NHL Logos/Calgary.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/CGY_light.svg",
     triCode: 'CGY',
     teamName: 'Calgary Flames',
     className: 'Calgary',
@@ -212,7 +212,7 @@ const calgaryTeam = new Team({
 
 const edmontonTeam = new Team({
     city: 'Edmonton',
-    logo: "./public/NHL Logos/Edmonton.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/EDM_light.svg",
     triCode: 'EDM',
     teamName: 'Edmonton Oilers',
     className: 'Edmonton',
@@ -220,7 +220,7 @@ const edmontonTeam = new Team({
 
 const losAngelesTeam = new Team({
     city: 'Los Angeles',
-    logo: "./public/NHL Logos/LosAngeles.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/LAK_light.svg",
     triCode: 'LAK',
     teamName: 'Los Angeles Kings',
     className: 'LosAngeles',
@@ -228,7 +228,7 @@ const losAngelesTeam = new Team({
 
 const sanJoseTeam = new Team({
     city: 'San Jose',
-    logo: "./public/NHL Logos/SanJose.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/SJS_light.svg",
     triCode: 'SJS',
     teamName: 'San Jose Sharks',
     className: 'SanJose',
@@ -236,7 +236,7 @@ const sanJoseTeam = new Team({
 
 const seattleTeam = new Team({
     city: 'Seattle',
-    logo: "./public/NHL Logos/Seattle.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/SEA_light.svg",
     triCode: 'SEA',
     teamName: 'Seattle Kraken',
     className: 'Seattle',
@@ -244,7 +244,7 @@ const seattleTeam = new Team({
 
 const vancouverTeam = new Team({
     city: 'Vancouver',
-    logo: "./public/NHL Logos/Vancouver.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/VAN_light.svg",
     triCode: 'VAN',
     teamName: 'Vancouver Canucks',
     className: 'Vancouver',
@@ -252,7 +252,7 @@ const vancouverTeam = new Team({
 
 const vegasTeam = new Team({
     city: 'Vegas',
-    logo: "./public/NHL Logos/Vegas.png",
+    teamLogo: "https://assets.nhle.com/logos/nhl/svg/VGK_light.svg",
     triCode: 'VGK',
     teamName: 'Vegas Golden Knights',
     className: 'Vegas',

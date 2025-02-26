@@ -1,4 +1,4 @@
-import { Player as PlayerModel } from '../../models/playerModel.js';
+import { Player } from '../../models/index.js'; // Import User and Player models
 import { Op } from 'sequelize'; // Import Sequelize operators
 import express, { Request, Response } from 'express';  // Import express and its types
 
@@ -8,36 +8,16 @@ const router = express.Router();
 
 
 // API route to retrieve all players
-app.get('/players', async (_req, res) => {
+router.get('/players', async (_req, res) => {
     try {
-        const players = await PlayerModel.findAll();  // Retrieve all players from the database
+        const players = await Player.findAll();  // Retrieve all players from the database
         res.json(players);  // Return the players as JSON response
     } catch (error) {
         console.error('❌ Error retrieving players:', error);
         res.status(500).send('Error retrieving players');
-        return;
     }
 });
 
-// Route to fetch player data by playerID from the database
-app.get('/api/player/:id', async (req: Request, res: Response) => {
-    const { playerID } = req.params;
-
-    try {
-        // Fetch player data using the playerID from the database
-        const player = await PlayerModel.findOne({ where: { id: playerID } });
-
-        if (!player) {
-            res.status(404).json({ message: 'Player not found' });
-        }
-
-        // Send the player data as JSON
-        res.json(player);
-    } catch (error) {
-        console.error('Error fetching player data:', error);
-        res.status(500).send('Error fetching player data');
-    }
-});
 
 // Route to fetch top players for a specific team, this will be used to display top players for user's favorite team on the home page
 app.get('/api/team-top-players/:teamAbbreviation', async (req: Request, res: Response) => {
@@ -45,19 +25,19 @@ app.get('/api/team-top-players/:teamAbbreviation', async (req: Request, res: Res
 
     try {
         const [topGoalScorer, topAssistLeader, topPointLeader, topGoalie] = await Promise.all([
-            PlayerModel.findOne({
+            Player.findOne({
                 where: { teamAbbreviation },
                 order: [['goals', 'DESC']],
             }),
-            PlayerModel.findOne({
+            Player.findOne({
                 where: { teamAbbreviation },
                 order: [['assists', 'DESC']],
             }),
-            PlayerModel.findOne({
+            Player.findOne({
                 where: { teamAbbreviation },
                 order: [['points', 'DESC']],
             }),
-            PlayerModel.findOne({
+            Player.findOne({
                 where: { teamAbbreviation, positionCode: 'G' },
                 order: [['savePercentage', 'DESC']],
             }),
@@ -77,7 +57,7 @@ app.get('/api/search-players', async (req: Request, res: Response) => {
     const { query } = req.query;
 
     try {
-        const players = await PlayerModel.findAll({
+        const players = await Player.findAll({
             where: {
                 [Op.or]: [
                     { firstName: { [Op.iLike]: `%${query}%` } },

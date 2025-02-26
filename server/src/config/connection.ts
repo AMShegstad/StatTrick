@@ -10,7 +10,7 @@ export const sequelize = new Sequelize(
     dialect: 'postgres',
     logging: false,
 });
-
+console.log('Logging database .env variables in connection.ts - credentials are currently hardcoded. Please update this before deploying to production as they are showing as undefined.');
 console.log(process.env.PG_DATABASE);
 console.log(process.env.PG_USER);
 console.log(process.env.PG_PASSWORD);
