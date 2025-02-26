@@ -1,3 +1,4 @@
+/*
 import { Team } from '../models/index.js'; // Adjust path as needed
 import { sequelize } from '../config/connection.js'; // Ensure database connection
 
@@ -55,7 +56,9 @@ export const seedTeams = async (teams: any) => {
     }
 };
 
+
 // Run the script when executed
 seedTeams(teams);
 
 export default seedTeams;
+*/

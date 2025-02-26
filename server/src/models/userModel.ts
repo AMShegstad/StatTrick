@@ -3,19 +3,19 @@ import { Player } from "./playerModel.js";
 import bcrypt from "bcrypt";
 
 export interface UserData {
-  id?: number;
-  username: string;
-  password: string;
-  email: string;
-  favoriteTeam: string;
-}
+    id?: number;
+    username: string;
+    password: string;
+    email: string;
+    favorite_team: string;
+};
 
 export class User extends Model<UserData> implements UserData {
-  public id?: number;
-  public username!: string;
-  public password!: string;
-  public email!: string;
-  public favoriteTeam!: string;
+    declare id: number;
+    declare username: string;
+    declare password: string;
+    declare email: string;
+    declare favorite_team: string;
 
   // Explicitly declare Sequelize-generated methods
   declare addFavoritePlayer: (player: Player) => Promise<void>;
@@ -30,72 +30,64 @@ export class User extends Model<UserData> implements UserData {
 }
 
 export function UserFactory(sequelize: Sequelize): typeof User {
-  User.init(
-    {
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          len: {
-            args: [3, 16],
-            msg: "Username must be between 3 and 16 characters long",
-          },
-          notNull: {
-            msg: "Please enter a username",
-          },
+    User.init(
+        {
+            id: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+                primaryKey: true,
+            },
+            username: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: false,
+                validate: {
+                    len: {
+                        args: [3, 16],
+                        msg: 'Username must be between 3 and 16 characters long',
+                    },
+                    notNull: {
+                        msg: 'Please enter a username',
+                    },
+                }
+            },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    len: {
+                        args: [8, 100],
+                        msg: 'Password must be between 8 and 16 characters long',
+                    },
+                    notNull: {
+                        msg: 'Please enter a password',
+                    },
+                }
+            },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+                validate: {
+                    isEmail: {
+                        msg: 'Please enter a valid email address',
+                    },
+                    notNull: {
+                        msg: 'Please enter an email address',
+                    },
+                }
+            },
+            favorite_team: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
         },
-      },
-      password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: {
-            args: [8, 100],
-            msg: "Password must be between 8 and 16 characters long",
-          },
-          notNull: {
-            msg: "Please enter a password",
-          },
-        },
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          isEmail: {
-            msg: "Please enter a valid email address",
-          },
-          notNull: {
-            msg: "Please enter an email address",
-          },
-        },
-      },
-      favoriteTeam: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-    },
-    {
-      sequelize,
-      tableName: "userData",
-      modelName: "User",
-      hooks: {
-        beforeCreate: async (user: User) => {
-          await user.setPassword(user.password);
-        },
-        beforeUpdate: async (user: User) => {
-          await user.setPassword(user.password);
-        },
-      },
-    }
-  );
+        {
+            sequelize,
+            tableName: 'user_data',
+            modelName: 'User',
+        }
+    );
 
   return User;
 }

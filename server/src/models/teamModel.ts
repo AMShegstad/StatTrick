@@ -2,81 +2,51 @@ import { Model, DataTypes, Sequelize } from 'sequelize';
 //import { sequelize } from '../config/connection.js';
 
 export interface TeamInfo {
-    triCode: string;
+    tri_code: string;
     city: string;
-    teamName: string;
-    className: string;
-    wins?: number;
-    losses?: number;
-    overtimeLosses?: number;
-    points?: number;
-    gamesPlayed?: number;
-    conferenceName?: string;
-    divisionName?: string;
-    divisionSequence?: number;
-    teamLogo?: string;
+    team_name: string;
+    team_logo: string;
+    class_name: string;
 }
-
-/*
-
-export class Team {
-    triCode: string;
-    wins?: number;
-    losses?: number;
-    overtimeLosses?: number;
-    points?: number;
-    gamesPlayed?: number;
-    conferenceName?: string;
-    divisionName?: string;
-    divisionSequence?: number;
-    // other properties
-}
-*/
 
 export class Team extends Model<TeamInfo> implements TeamInfo {
-    public triCode!: string;
+    public tri_code!: string;
     public city!: string;
-    public teamName!: string;
-    public teamLogo!: string;
-    public className!: string;
+    public team_name!: string;
+    public team_logo!: string;
+    public class_name!: string;
 }
 
 export function TeamFactory(sequelize: Sequelize): typeof Team {
     Team.init(
         {
-            triCode: {
+            tri_code: {
                 type: DataTypes.STRING,
                 primaryKey: true,
                 allowNull: false,
-                field: 'tricode',
             },
             city: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            teamName: {
+            team_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'teamname', // Ensure this matches the actual column name in the database
             },
-            teamLogo: {
+            team_logo: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                field: 'teamlogo', // Ensure this matches the actual column name in the database
             },
-            className: {
+            class_name: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                field: 'classname', // Ensure this matches the actual column name in the database
             },
         },
         {
             sequelize,
-            modelName: 'Team',  // Define modelName here for the Team model
-            tableName: 'teams',
-            timestamps: true,
-            createdAt: 'createdat',
-            updatedAt: 'updatedat',
+            modelName: "Team",
+            tableName: "teams",
+            timestamps: false,
         }
     );
 

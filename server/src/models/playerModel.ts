@@ -1,69 +1,67 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export interface PlayerInfo {
-    playerID: number;
-    firstName: string;
-    lastName: string;
-    teamAbbreviation: string;
-    positionCode: string;
+    player_id: number;
+    first_name: string;
+    last_name: string;
+    team_abbreviation: string;
+    position_code: string;
     headshot: string;
-    sweaterNumber: number;
+    sweater_number: number;
 }
 
 export class Player extends Model<PlayerInfo> implements PlayerInfo {
-    public playerID!: number;
-    public firstName!: string;
-    public lastName!: string;
-    public teamAbbreviation!: string;
-    public positionCode!: string;
+    public player_id!: number;
+    public first_name!: string;
+    public last_name!: string;
+    public team_abbreviation!: string;
+    public position_code!: string;
     public headshot!: string;
-    public sweaterNumber!: number;
+    public sweater_number!: number;
 }
 
 export function PlayerFactory(sequelize: Sequelize): typeof Player {
     Player.init(
         {
-            playerID: {
+            player_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 allowNull: false,
-                field: 'playerid', // Ensure this matches the actual column name in the database
             },
-            firstName: {
+            first_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'firstname', // Ensure this matches the actual column name in the database
             },
-            lastName: {
+            last_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'lastname', // Ensure this matches the actual column name in the database
-            },
-            teamAbbreviation: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                field: 'teamabbreviation', // Ensure this matches the actual column name in the database
-            },
-            positionCode: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                field: 'positioncode', // Ensure this matches the actual column name in the database
             },
             headshot: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                field: 'headshot', // Ensure this matches the actual column name in the database
             },
-            sweaterNumber: {
+            team_abbreviation: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                references: {
+                    model: 'teams',  // Reference to 'Team' model
+                    key: 'tri_code',
+                },
+            },
+            position_code: {
+                type: DataTypes.STRING,
+                allowNull: false,
+
+            },
+            sweater_number: {
                 type: DataTypes.INTEGER,
-                allowNull: true,
-                field: 'sweaternumber', // Ensure this matches the actual column name in the database
+                allowNull: false,
             },
         },
         {
             sequelize,
-            modelName: 'Player',  // Define modelName here for the Player model
-            tableName: 'players',
+            modelName: "Player",  // Define modelName here for the Player model
+            tableName: "players",
             timestamps: false,
         }
     );

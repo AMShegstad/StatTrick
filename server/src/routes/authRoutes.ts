@@ -8,8 +8,8 @@ dotenv.config();
 const router = Router();
 
 router.post('/register', async (req, res) => {
-  const { username, password, email, favoriteTeam } = req.body;
-  console.log('Received registration request with data:', { username, password, email, favoriteTeam });
+  const { username, password, email, favorite_team } = req.body;
+  console.log('Received registration request with data:', { username, password, email, favorite_team });
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -19,7 +19,7 @@ router.post('/register', async (req, res) => {
       username,
       password: hashedPassword,
       email,
-      favoriteTeam,
+      favorite_team: favorite_team,
     });
 
     console.log(newUser);
@@ -51,9 +51,9 @@ router.post('/login', async (req, res) => {
     if (!process.env.JWT_SECRET_KEY) {
       return res.status(500).json({ error: 'JWT secret key is not defined' });
     }
-    const token = jwt.sign({ id: user.id, username: user.username, favoriteTeam: user.favoriteTeam }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user.id, username: user.username, favoriteTeam: user.favorite_team }, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
 
-    return res.json({ token, favoriteTeam: user.favoriteTeam });
+    return res.json({ token, favoriteTeam: user.favorite_team });
   } catch (error) {
     return res.status(500).json({ error: 'Failed to login' });
   }

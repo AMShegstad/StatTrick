@@ -1,5 +1,5 @@
 -- Corrected teams data
-INSERT INTO teams (tricode, city, teamname, teamlogo, classname)
+INSERT INTO teams (tri_code, city, team_name, team_logo, class_name)
 VALUES
   ('BOS', 'Boston', 'Boston Bruins', 'https://assets.nhle.com/logos/nhl/svg/BOS_light.svg', 'Boston'),
   ('BUF', 'Buffalo', 'Buffalo Sabres', 'https://assets.nhle.com/logos/nhl/svg/BUF_light.svg', 'Buffalo'),

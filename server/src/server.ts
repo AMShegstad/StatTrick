@@ -1,12 +1,13 @@
 import express, { Response, Request } from 'express';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
+import cors from 'cors';
 import routes from './routes/index.js';
 import { sequelize } from './config/connection.js';
 import fetchAndStoreRosters from './utils/fetchAndStoreRosters.js';
-import morgan from 'morgan';
-import cors from 'cors';
-import authMiddleware from './middleware/auth.js'; // Import JWT middleware
-//import { User, Player, UserFavorites } from '../src/models/index.js';
+import updatePlayerStats from './utils/updatePlayerStats.js';
+dotenv.config();
+import authenticationToken from './middleware/auth.js';
 
 dotenv.config();
 
@@ -22,13 +23,14 @@ app.use('/api', routes);
 
 // Add a test route
 
-app.get('/api/test', authMiddleware, (req: Request, res: Response) => {
+app.get('/api/test', authenticationToken, (req: Request, res: Response) => {
   console.log('GET /api/test');
   console.log(req.method);
   res.json({ message: 'JWT is working correctly' });
 });
 
 fetchAndStoreRosters();
+updatePlayerStats();
 
 sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
