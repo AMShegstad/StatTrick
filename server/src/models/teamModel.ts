@@ -1,54 +1,50 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export interface TeamInfo {
-    triCode: string;
+    tri_code: string;
     city: string;
-    teamName: string;
-    teamLogo: string;
-    className: string;
+    team_name: string;
+    team_logo: string;
+    class_name: string;
 }
 
 export class Team extends Model<TeamInfo> implements TeamInfo {
-    public triCode!: string;
+    public tri_code!: string;
     public city!: string;
-    public teamName!: string;
-    public teamLogo!: string;
-    public className!: string;
+    public team_name!: string;
+    public team_logo!: string;
+    public class_name!: string;
 }
 
 export function TeamFactory(sequelize: Sequelize): typeof Team {
     Team.init(
         {
-            triCode: {
+            tri_code: {
                 type: DataTypes.STRING,
                 primaryKey: true,
                 allowNull: false,
-                field: 'triCode',
             },
             city: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            teamName: {
+            team_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'teamName',
             },
-            teamLogo: {
+            team_logo: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                field: 'teamLogo',
             },
-            className: {
+            class_name: {
                 type: DataTypes.STRING,
                 allowNull: true,
-                field: 'className',
             },
         },
         {
             sequelize,
-            modelName: 'Team',  // Define modelName here for the Team model
-            tableName: 'teams',
+            modelName: "Team",
+            tableName: "teams",
             timestamps: false,
         }
     );

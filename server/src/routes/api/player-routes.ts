@@ -38,24 +38,24 @@ router.get('/player-stats/:teamAbbreviation', async (req, res) => {
 
 // Route to fetch top players for a specific team, this will be used to display top players for user's favorite team on the home page
 router.get('/team-top-players/:teamAbbreviation', async (req: Request, res: Response) => {
-    const { teamAbbreviation } = req.params;
+    const { team_abbreviation } = req.params;
 
     try {
         const [topGoalScorer, topAssistLeader, topPointLeader, topGoalie] = await Promise.all([
             Player.findOne({
-                where: { teamAbbreviation },
+                where: { team_abbreviation },
                 order: [['goals', 'DESC']],
             }),
             Player.findOne({
-                where: { teamAbbreviation },
+                where: { team_abbreviation },
                 order: [['assists', 'DESC']],
             }),
             Player.findOne({
-                where: { teamAbbreviation },
+                where: { team_abbreviation },
                 order: [['points', 'DESC']],
             }),
             Player.findOne({
-                where: { teamAbbreviation, positionCode: 'G' },
+                where: { team_abbreviation, position_code: 'G' },
                 order: [['savePercentage', 'DESC']],
             }),
         ]);
@@ -77,8 +77,8 @@ router.get('/search-players', async (req: Request, res: Response) => {
         const players = await Player.findAll({
             where: {
                 [Op.or]: [
-                    { firstName: { [Op.iLike]: `%${query}%` } },
-                    { lastName: { [Op.iLike]: `%${query}%` } },
+                    { first_name: { [Op.iLike]: `%${query}%` } },
+                    { last_name: { [Op.iLike]: `%${query}%` } },
                 ],
             },
             limit: 10, // Limit search results
@@ -92,9 +92,9 @@ router.get('/search-players', async (req: Request, res: Response) => {
 });
 
 // Endpoint to get player data by playerID
-router.get('/players/:playerID', async (req, res) => {
+router.get('/players/:player_id', async (req, res) => {
     try {
-        const player = await Player.findOne({ where: { playerID: req.params.playerID } });
+        const player = await Player.findOne({ where: { player_id: req.params.player_id } });
         if (!player) {
             res.status(404).json({ message: 'Player not found' });
         }

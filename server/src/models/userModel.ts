@@ -6,7 +6,7 @@ export interface UserData {
     username: string;
     password: string;
     email: string;
-    favoriteTeam: string;
+    favorite_team: string;
 };
 
 export class User extends Model<UserData> implements UserData {
@@ -14,7 +14,7 @@ export class User extends Model<UserData> implements UserData {
     declare username: string;
     declare password: string;
     declare email: string;
-    declare favoriteTeam: string;
+    declare favorite_team: string;
 
      // Explicitly declare Sequelize-generated methods
      declare addFavoritePlayer: (player: Player) => Promise<void>;
@@ -52,7 +52,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
                 allowNull: false,
                 validate: {
                     len: {
-                        args: [8, 16],
+                        args: [8, 100],
                         msg: 'Password must be between 8 and 16 characters long',
                     },
                     notNull: {
@@ -73,15 +73,14 @@ export function UserFactory(sequelize: Sequelize): typeof User {
                     },
                 }
             },
-            favoriteTeam: {
+            favorite_team: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'favoriteTeam',
             },
         },
         {
             sequelize,
-            tableName: 'userData',
+            tableName: 'user_data',
             modelName: 'User',
         }
     );

@@ -8,38 +8,34 @@ async function updatePlayerStats() {
 
     for (const player of players) {
       try {
-        console.log(`Fetching stats for player ID: ${player.playerID}`);
+        console.log(`Fetching stats for player ID: ${player.player_id}`);
 
         // Fetch player stats directly using the new API endpoint
-        const response = await axios.get(`https://api-web.nhle.com/v1/player/${player.playerID}/landing`);
+        const response = await axios.get(`https://api-web.nhle.com/v1/player/${player.player_id}/landing`);
         const stats = response.data.featuredStats.regularSeason.subSeason;
 
         if (!stats) {
-          console.warn(`No stats found for player: ${player.firstName} ${player.lastName}`);
+          console.warn(`No stats found for player: ${player.first_name} ${player.last_name}`);
           continue;
         }
 
         const statData = {
-          playerID: player.playerID,
-          firstName: player.firstName,
-          lastName: player.lastName,
-          season: '20242025', // Hardcoded for now, can be dynamic
+          player_id: player.player_id,
+          season: '20242025',
           goals: stats.goals ?? 0,
           assists: stats.assists ?? 0,
           points: stats.points ?? 0,
-          plusMinus: player.positionCode !== 'G' ? stats.plusMinus ?? 0 : null,
-          saves: player.positionCode === 'G' ? stats.saves ?? 0 : null,
-          goalsAllowed: player.positionCode === 'G' ? stats.goalsAllowed ?? 0 : null,
-          savePercentage: player.positionCode === 'G' ? stats.savePercentage ?? 0 : null,
-          goalsAgainstAverage: player.positionCode === 'G' ? stats.goalsAgainstAverage ?? 0 : null,
+          plus_minus: stats.plusMinus || null,
+          save_pctg: stats.savePctg || null,
+          goals_against_avg: stats.goalsAgainstAvg || null,
         };
 
         // Insert or update stats in the player_stats table
         await PlayerStats.upsert(statData);
 
-        console.log(`✅ Successfully updated stats for ${player.firstName} ${player.lastName}`);
+        console.log(`✅ Successfully updated stats for ${player.first_name} ${player.last_name}`);
       } catch (error) {
-        console.error(`❌ Error fetching stats for player ID: ${player.playerID}`, error);
+        console.error(`❌ Error fetching stats for player ID: ${player.player_id}`, error);
       }
     }
 

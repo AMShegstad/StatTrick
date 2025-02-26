@@ -23,7 +23,7 @@ export const addFavorite = async (req: Request, res: Response) => {
         // Add the player to the user's favorites using Sequelize's built-in method
         if (user && player) {
             await user.addFavoritePlayer?.(player); // Optional chaining prevents calling if undefined
-            console.log(`✅ Player ${player.firstName} ${player.lastName} added to favorites.`);
+            console.log(`✅ Player ${player.first_name} ${player.last_name} added to favorites.`);
         }
         res.status(201).json({ message: 'Player added to favorites.' });
     } catch (error) {
@@ -51,7 +51,7 @@ export const removeFavorite = async (req: Request, res: Response) => {
         // Remove the player from the user's favorites
         if (user && player) {
             await user.removeFavoritePlayer?.(player); // Optional chaining prevents calling if undefined
-            console.log(`✅ Player ${player.firstName} ${player.lastName} removed from favorites.`);
+            console.log(`✅ Player ${player.first_name} ${player.last_name} removed from favorites.`);
         }
 
         res.status(200).json({ message: 'Player removed from favorites.' });
