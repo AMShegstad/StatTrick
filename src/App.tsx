@@ -29,6 +29,19 @@ function App() {
     setShowBettingOdds(false);
   };
 
+  const nhlTeams = [
+    "Anaheim Ducks", "Boston Bruins", "Buffalo Sabres", "Calgary Flames", "Carolina Hurricanes", "Chicago Blackhawks", "Colorado Avalanche",
+    "Columbus Blue Jackets", "Dallas Stars", "Detroit Red Wings", "Edmonton Oilers",
+    "Florida Panthers", "Los Angeles Kings", "Minnesota Wild", "Montreal Canadiens",
+    "Nashville Predators", "New Jersey Devils", "New York Islanders", "New York Rangers",
+    "Ottawa Senators", "Philadelphia Flyers", "Pittsburgh Penguins", "San Jose Sharks",
+    "Seattle Kraken", "St. Louis Blues", "Tampa Bay Lightning", "Toronto Maple Leafs", "Utah Hockey Club",
+    "Vancouver Canucks", "Vegas Golden Knights", "Washington Capitals", "Winnipeg Jets",
+  ];
+  
+  
+  
+
   useEffect(() => {
     const fetchOdds = async () => {
       try {
@@ -114,27 +127,45 @@ function App() {
           <Modal.Title>{isSignUp ? "Sign Up" : "Login"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Button variant="primary" type="submit" className="w-100">
-              {isSignUp ? "Sign Up" : "Login"}
-            </Button>
-          </Form>
-          <Button
-            variant="link"
-            onClick={() => setIsSignUp((prev) => !prev)}
-            className="mt-2 w-100"
-          >
-            {isSignUp ? "Already have an account? Login" : "Don't have an account? Sign Up"}
-          </Button>
-        </Modal.Body>
+  <Form>
+    <Form.Group controlId="formBasicEmail">
+      <Form.Label>Email address</Form.Label>
+      <Form.Control type="email" placeholder="Enter email" />
+    </Form.Group>
+    <Form.Group controlId="formBasicPassword">
+      <Form.Label>Password</Form.Label>
+      <Form.Control type="password" placeholder="Password" />
+    </Form.Group>
+
+    {/* render NHL Teams dropdown in sign up form */}
+    {isSignUp && (
+      <Form.Group controlId="formNhlTeam">
+        <Form.Label>Select your favorite NHL team</Form.Label>
+        <Form.Select>
+          {nhlTeams.map((team, index) => (
+            <option key={index} value={team}>
+              {team}
+            </option>
+          ))}
+        </Form.Select>
+      </Form.Group>
+    )}
+
+    <Button variant="primary" type="submit" className="w-100">
+      {isSignUp ? "Sign Up" : "Login"}
+    </Button>
+  </Form>
+
+  <Button
+    variant="link"
+    onClick={() => setIsSignUp((prev) => !prev)}
+    className="mt-2 w-100"
+  >
+    {isSignUp ? "Already have an account? Login" : "Don't have an account? Sign Up"}
+  </Button>
+</Modal.Body>
+
+
       </Modal>
 
       {showContent && (
