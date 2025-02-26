@@ -1,14 +1,37 @@
-import { sequelize } from '../config/connection.js';  // Import sequelize from connection.ts
-import { Player } from './playerModel.js';  // Import your models
+import { sequelize } from '../config/connection.js';
+import { UserFactory } from './userModel.js';
+import { PlayerFactory } from './playerModel.js';
+import { TeamFactory } from './teamModel.js';
 
-// Sync all models with the database
+const User = UserFactory(sequelize);
+const Player = PlayerFactory(sequelize);
+const Team = TeamFactory(sequelize);
+
+// Define Many-to-Many relationship for favorites
+User.belongsToMany(Player, {
+    through: 'user_favorites',
+    foreignKey: 'userID',
+    otherKey: 'playerID',
+    as: 'favoritePlayers', // ALIAS IS REQUIRED
+});
+
+Player.belongsToMany(User, {
+    through: 'user_favorites',
+    foreignKey: 'playerID',
+    otherKey: 'userID',
+    as: 'favoritedByUsers',
+});
+
+// One-to-Many: A team has many players
+Team.hasMany(Player, { 
+    foreignKey: 'teamAbbreviation', // Corrected foreignKey
+});
+Player.belongsTo(Team, { 
+    foreignKey: 'teamAbbreviation', 
+});
+
 sequelize.sync()
-    .then(() => {
-        console.log('✅ Database synced successfully');
-    })
-    .catch((err) => {
-        console.error('❌ Error syncing database:', err);
-    });
+    .then(() => console.log('✅ Models have been successfully synced.'))
+    .catch((err) => console.error('❌ Error syncing models:', err));
 
-// Export the models
-export { Player, sequelize };  // Export both sequelize and your models
+export { sequelize, User, Player, Team };

@@ -1,9 +1,17 @@
-import { DataTypes, Model } from 'sequelize';
-import { sequelize } from '../config/connection.js';
+import { DataTypes, Model, Sequelize } from 'sequelize';
 
-// Metadata only (No real-time stats stored)
-export class Player extends Model {
-    public id!: number; // NHL API Player ID
+export interface PlayerInfo {
+    playerID: number;
+    firstName: string;
+    lastName: string;
+    teamAbbreviation: string;
+    positionCode: string;
+    headshot: string;
+    sweaterNumber: number;
+}
+
+export class Player extends Model<PlayerInfo> implements PlayerInfo {
+    public playerID!: number;
     public firstName!: string;
     public lastName!: string;
     public teamAbbreviation!: string;
@@ -12,23 +20,56 @@ export class Player extends Model {
     public sweaterNumber!: number;
 }
 
-// Initialize Sequelize model
-Player.init(
-    {
-        id: { type: DataTypes.INTEGER, primaryKey: true },
-        firstName: { type: DataTypes.STRING, allowNull: false },
-        lastName: { type: DataTypes.STRING, allowNull: false },
-        headshot: { type: DataTypes.STRING, allowNull: true },
-        teamAbbreviation: { type: DataTypes.STRING, allowNull: true },
-        positionCode: { type: DataTypes.STRING, allowNull: false },
-        sweaterNumber: { type: DataTypes.INTEGER, allowNull: false },
-    },
-    {
-        sequelize,
-        modelName: 'Player',
-        tableName: 'players',
-        timestamps: false,
-    }
-);
+export function PlayerFactory(sequelize: Sequelize): typeof Player {
+    Player.init(
+        {
+            playerID: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                allowNull: false,
+                field: 'playerID'
+            },
+            firstName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                field: 'firstName'
+            },
+            lastName: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                field: 'lastName'
+            },
+            headshot: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
+            teamAbbreviation: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                field: 'teamAbbreviation',
+                references: {
+                    model: 'teams',  // Reference to 'Team' model
+                    key: 'triCode',
+                },
+            },
+            positionCode: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                field: 'positionCode'
+            },
+            sweaterNumber: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                field: 'sweaterNumber'
+            },
+        },
+        {
+            sequelize,
+            modelName: 'Player',  // Define modelName here for the Player model
+            tableName: 'players',
+            timestamps: false,
+        }
+    );
 
-export default Player;
+    return Player;
+}
