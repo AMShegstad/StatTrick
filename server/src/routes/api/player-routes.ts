@@ -1,11 +1,10 @@
 import { Player } from '../../models/index.js'; // Import User and Player models
 import { Op } from 'sequelize'; // Import Sequelize operators
 import express, { Request, Response } from 'express';  // Import express and its types
+import axios from 'axios';
 
 const app = express();
 const router = express.Router();
-
-
 
 // API route to retrieve all players
 router.get('/players', async (_req, res) => {
@@ -18,27 +17,45 @@ router.get('/players', async (_req, res) => {
     }
 });
 
+// Endpoint to fetch player stats for a given team abbreviation
+router.get('/player-stats/:teamAbbreviation', async (req, res) => {
+    const { teamAbbreviation } = req.params;
+  
+    try {
+        // Fetch stats for the team using the team abbreviation
+        const response = await axios.get(`https://api-web.nhle.com/v1/club-stats/${teamAbbreviation}/now`);
+        
+        // Get skaters and goalies stats
+        const { skaters, goalies } = response.data;
+    
+        // Send back the stats data for skaters and goalies
+        res.json({ skaters, goalies });
+    } catch (error) {
+        console.error(`Error fetching player stats for team ${teamAbbreviation}:`, error);
+        res.status(500).json({ message: 'Error fetching player stats' });
+    }
+});
 
 // Route to fetch top players for a specific team, this will be used to display top players for user's favorite team on the home page
-app.get('/api/team-top-players/:teamAbbreviation', async (req: Request, res: Response) => {
-    const { teamAbbreviation } = req.params;
+router.get('/team-top-players/:teamAbbreviation', async (req: Request, res: Response) => {
+    const { team_abbreviation } = req.params;
 
     try {
         const [topGoalScorer, topAssistLeader, topPointLeader, topGoalie] = await Promise.all([
             Player.findOne({
-                where: { teamAbbreviation },
+                where: { team_abbreviation },
                 order: [['goals', 'DESC']],
             }),
             Player.findOne({
-                where: { teamAbbreviation },
+                where: { team_abbreviation },
                 order: [['assists', 'DESC']],
             }),
             Player.findOne({
-                where: { teamAbbreviation },
+                where: { team_abbreviation },
                 order: [['points', 'DESC']],
             }),
             Player.findOne({
-                where: { teamAbbreviation, positionCode: 'G' },
+                where: { team_abbreviation, position_code: 'G' },
                 order: [['savePercentage', 'DESC']],
             }),
         ]);
@@ -53,15 +70,15 @@ app.get('/api/team-top-players/:teamAbbreviation', async (req: Request, res: Res
 });
 
 // Route to search for players by first name or last name
-app.get('/api/search-players', async (req: Request, res: Response) => {
+router.get('/search-players', async (req: Request, res: Response) => {
     const { query } = req.query;
 
     try {
         const players = await Player.findAll({
             where: {
                 [Op.or]: [
-                    { firstName: { [Op.iLike]: `%${query}%` } },
-                    { lastName: { [Op.iLike]: `%${query}%` } },
+                    { first_name: { [Op.iLike]: `%${query}%` } },
+                    { last_name: { [Op.iLike]: `%${query}%` } },
                 ],
             },
             limit: 10, // Limit search results
@@ -74,4 +91,19 @@ app.get('/api/search-players', async (req: Request, res: Response) => {
     }
 });
 
-export { router as playerRoutes }
+// Endpoint to get player data by playerID
+router.get('/players/:player_id', async (req, res) => {
+    try {
+        const player = await Player.findOne({ where: { player_id: req.params.player_id } });
+        if (!player) {
+            res.status(404).json({ message: 'Player not found' });
+        }
+        res.json(player);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching player data' });
+    }
+});
+
+app.use('/api', router); // Use the router under the `/api` base URL
+
+export { router as playerRoutes };

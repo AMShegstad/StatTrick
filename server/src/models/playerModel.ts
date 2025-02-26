@@ -1,72 +1,67 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 export interface PlayerInfo {
-    playerID: number;
-    firstName: string;
-    lastName: string;
-    teamAbbreviation: string;
-    positionCode: string;
+    player_id: number;
+    first_name: string;
+    last_name: string;
+    team_abbreviation: string;
+    position_code: string;
     headshot: string;
-    sweaterNumber: number;
+    sweater_number: number;
 }
 
 export class Player extends Model<PlayerInfo> implements PlayerInfo {
-    public playerID!: number;
-    public firstName!: string;
-    public lastName!: string;
-    public teamAbbreviation!: string;
-    public positionCode!: string;
+    public player_id!: number;
+    public first_name!: string;
+    public last_name!: string;
+    public team_abbreviation!: string;
+    public position_code!: string;
     public headshot!: string;
-    public sweaterNumber!: number;
+    public sweater_number!: number;
 }
 
 export function PlayerFactory(sequelize: Sequelize): typeof Player {
     Player.init(
         {
-            playerID: {
+            player_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 allowNull: false,
-                field: 'playerID'
             },
-            firstName: {
+            first_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'firstName'
             },
-            lastName: {
+            last_name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'lastName'
             },
             headshot: {
                 type: DataTypes.STRING,
                 allowNull: true,
             },
-            teamAbbreviation: {
+            team_abbreviation: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'teamAbbreviation',
                 references: {
                     model: 'teams',  // Reference to 'Team' model
-                    key: 'triCode',
+                    key: 'tri_code',
                 },
             },
-            positionCode: {
+            position_code: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                field: 'positionCode'
+
             },
-            sweaterNumber: {
+            sweater_number: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                field: 'sweaterNumber'
             },
         },
         {
             sequelize,
-            modelName: 'Player',  // Define modelName here for the Player model
-            tableName: 'players',
+            modelName: "Player",  // Define modelName here for the Player model
+            tableName: "players",
             timestamps: false,
         }
     );

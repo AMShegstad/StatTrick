@@ -9,8 +9,8 @@ async function fetchAndStoreRosters() {
   // Loop through each team and fetch their current roster
   for (const team of teams) {
     try {
-      console.log(`Fetching roster for team: ${team.triCode}`);
-      const response = await axios.get(`https://api-web.nhle.com/v1/roster/${team.triCode}/current`);
+      console.log(`Fetching roster for team: ${team.tri_code}`);
+      const response = await axios.get(`https://api-web.nhle.com/v1/roster/${team.tri_code}/current`);
       const roster = response.data;
 
       // Combine forwards, defensemen, and goalies into one array
@@ -22,21 +22,21 @@ async function fetchAndStoreRosters() {
 
       // Insert players into the database
       const playerData = players.map(player => ({
-        playerID: player.id,
-        firstName: player.firstName.default,
-        lastName: player.lastName.default,
-        teamAbbreviation: team.triCode,
-        positionCode: player.positionCode,
+        player_id: player.id,
+        first_name: player.firstName.default,
+        last_name: player.lastName.default,
+        team_abbreviation: team.tri_code,
+        position_code: player.positionCode,
         headshot: player.headshot,
-        sweaterNumber: player.sweaterNumber,
+        sweater_number: player.sweaterNumber,
       }));
 
-      await Player.bulkCreate(playerData, { updateOnDuplicate: ['firstName', 'lastName', 'positionCode', 'headshot', 'sweaterNumber'] });
+      await Player.bulkCreate(playerData, { updateOnDuplicate: ['first_name', 'last_name', 'position_code', 'headshot', 'sweater_number'] });
 
-      console.log(`Successfully added/updated players for team: ${team.triCode}`);
+      console.log(`Successfully added/updated players for team: ${team.tri_code}`);
     } catch (error) {
       const errorMessage = (error as any).message;
-      console.error(`❌ Error fetching roster for ${team.triCode}:`, errorMessage);
+      console.error(`❌ Error fetching roster for ${team.tri_code}:`, errorMessage);
     }
   }
 
