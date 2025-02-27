@@ -41,7 +41,7 @@ export function PlayerFactory(sequelize: Sequelize): typeof Player {
                 type: DataTypes.STRING,
                 allowNull: false,
                 references: {
-                    model: 'teams',  // Reference to 'Team' model
+                    model: 'Team',  // Reference to 'Team' model
                     key: 'tri_code',
                 },
             },
