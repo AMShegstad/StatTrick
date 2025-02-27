@@ -1,8 +1,15 @@
 // filepath: /C:/Users/Alex's Lenovo/bootcamp/StatTrick_v6/StatTrick/server/src/middleware/auth.ts
 import { Request, Response, NextFunction } from 'express';
+//import type { Request, Response, NextFunction } from 'express';
+
+import { JwtPayload } from 'jsonwebtoken';
+
+interface CustomRequest extends Request {
+  user?: JwtPayload;
+}
 import jwt from 'jsonwebtoken';
 
-const authenticationToken = (req: Request, res: Response, next: NextFunction) => {
+const authenticationToken = (req: CustomRequest, res: Response, next: NextFunction) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1] || '';
   const secretKey = process.env.JWT_SECRET_KEY || '';

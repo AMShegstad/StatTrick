@@ -1,6 +1,6 @@
 
 import { type JwtPayload, jwtDecode } from 'jwt-decode';
-import UserData from '../interfaces/UserData';
+import UserData from '../../../server/interfaces/UserData';
 
 class AuthService {
   getProfile() {

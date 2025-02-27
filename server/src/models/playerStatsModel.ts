@@ -62,6 +62,5 @@ export function PlayerStatsFactory(sequelize: Sequelize): typeof PlayerStats {
             timestamps: false,
         }
     );
-
-return PlayerStats;
+    return PlayerStats;
 }

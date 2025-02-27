@@ -1,7 +1,5 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
-import { Player } from "./playerModel.js";
-import bcrypt from "bcrypt";
-
+import { DataTypes, Model, Sequelize } from 'sequelize';
+import { Player } from './playerModel.js';
 export interface UserData {
     id?: number;
     username: string;
@@ -9,26 +7,17 @@ export interface UserData {
     email: string;
     favorite_team: string;
 };
-
 export class User extends Model<UserData> implements UserData {
     declare id: number;
     declare username: string;
     declare password: string;
     declare email: string;
     declare favorite_team: string;
-
-  // Explicitly declare Sequelize-generated methods
-  declare addFavoritePlayer: (player: Player) => Promise<void>;
-  declare removeFavoritePlayer: (player: Player) => Promise<void>;
-  declare getFavoritePlayers: () => Promise<Player[]>;
-
-  // Hash the password before saving the user
-  public async setPassword(password: string) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(password, saltRounds);
-  }
+     // Explicitly declare Sequelize-generated methods
+     declare addFavoritePlayer: (player: Player) => Promise<void>;
+     declare removeFavoritePlayer: (player: Player) => Promise<void>;
+     declare getFavoritePlayers: () => Promise<Player[]>;
 }
-
 export function UserFactory(sequelize: Sequelize): typeof User {
     User.init(
         {
@@ -40,7 +29,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
             username: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique: false,
+                unique: true,
                 validate: {
                     len: {
                         args: [3, 16],
@@ -49,6 +38,9 @@ export function UserFactory(sequelize: Sequelize): typeof User {
                     notNull: {
                         msg: 'Please enter a username',
                     },
+                    unique: {
+                        msg: 'Username already exists',
+                    }
                 }
             },
             password: {
@@ -88,6 +80,5 @@ export function UserFactory(sequelize: Sequelize): typeof User {
             modelName: 'User',
         }
     );
-
-  return User;
+    return User;
 }

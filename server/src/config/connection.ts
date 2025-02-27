@@ -2,8 +2,9 @@ import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// Initialize Sequelize with database connection settings
-export const sequelize = new Sequelize(
+export const sequelize = process.env.DB_URL
+  ? new Sequelize(process.env.DB_URL)
+  :  new Sequelize(
     'stattrick_db',  // PG_DATABASE
     'postgres',  // PG_USER
     'password',  // PG_PASSWORD

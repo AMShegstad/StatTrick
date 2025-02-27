@@ -1,6 +1,4 @@
-import { Model, DataTypes, Sequelize } from 'sequelize';
-//import { sequelize } from '../config/connection.js';
-
+import { DataTypes, Model, Sequelize } from 'sequelize';
 export interface TeamInfo {
     tri_code: string;
     city: string;
@@ -8,7 +6,6 @@ export interface TeamInfo {
     team_logo: string;
     class_name: string;
 }
-
 export class Team extends Model<TeamInfo> implements TeamInfo {
     public tri_code!: string;
     public city!: string;
@@ -16,7 +13,6 @@ export class Team extends Model<TeamInfo> implements TeamInfo {
     public team_logo!: string;
     public class_name!: string;
 }
-
 export function TeamFactory(sequelize: Sequelize): typeof Team {
     Team.init(
         {
@@ -49,6 +45,5 @@ export function TeamFactory(sequelize: Sequelize): typeof Team {
             timestamps: false,
         }
     );
-
     return Team;
 }

@@ -1,15 +1,13 @@
-_dataCREATE DATABASE stattrick_db;
-
+CREATE DATABASE stattrick_db;
 \c stattrick_db;
-
 -- Create the userData table
 CREATE TABLE IF NOT EXISTS user_data (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     favorite_team VARCHAR(255) NOT NULL
 );
-
 -- Create the teams table
 CREATE TABLE IF NOT EXISTS teams (
     tri_code VARCHAR(3) PRIMARY KEY, -- Team abbreviation, e.g., 'MIN' for Minnesota
@@ -18,7 +16,6 @@ CREATE TABLE IF NOT EXISTS teams (
     team_logo VARCHAR(255), -- URL for the team's logo
     class_name VARCHAR(255) -- Class name for the team's logo
 );
-
 -- Create the players table
 CREATE TABLE IF NOT EXISTS players (
     player_id INT PRIMARY KEY,
@@ -33,7 +30,6 @@ CREATE TABLE IF NOT EXISTS players (
     -- Foreign Key linking to the teams table
     FOREIGN KEY (team_abbreviation) REFERENCES teams(tri_code) ON DELETE CASCADE
 );
-
 -- Create the user_favorites table to store the relationship between users and their favorite players
 CREATE TABLE IF NOT EXISTS user_favorites (
     user_id INTEGER NOT NULL,
@@ -42,8 +38,6 @@ CREATE TABLE IF NOT EXISTS user_favorites (
     FOREIGN KEY (user_id) REFERENCES user_data(id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
 );
-
-
 CREATE TABLE IF NOT EXISTS player_stats (
     player_id INTEGER NOT NULL PRIMARY KEY,
     points INT DEFAULT 0,
@@ -56,3 +50,4 @@ CREATE TABLE IF NOT EXISTS player_stats (
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
 );
+\i seeds.sql

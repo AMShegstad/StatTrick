@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+/*import React, { useEffect } from 'react';
 import { Team } from '../../../server/src/models/teamModel';
 
 
@@ -56,3 +56,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+*/
