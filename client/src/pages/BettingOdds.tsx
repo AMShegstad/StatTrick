@@ -1,25 +1,11 @@
 import { useState, useEffect } from "react";
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from "@mui/material";
-import OddsService from "../server/oddsService";
 
-const BettingOdds: React.FC = () => {
-  // State to store betting odds data
-  const [bettingOdds, setBettingOdds] = useState<{ matchup: string; home_odds: number; away_odds: number }[]>([]);
+interface BettingOddsProps {
+  odds: { matchup: string; home_odds: number; away_odds: number }[];
+}
 
-  useEffect(() => {
-    // Fetch betting odds data
-    const fetchOdds = async () => {
-      const odds = await OddsService.getOdds();
-      const formattedOdds = odds.map((odd) => ({
-        matchup: `${odd.home_team} vs ${odd.away_team}`,
-        home_odds: odd.home_odds,
-        away_odds: odd.away_odds,
-      }));
-      setBettingOdds(formattedOdds);
-    };
-    fetchOdds();
-  }, []);
-
+const BettingOdds: React.FC<BettingOddsProps> = ({ odds }) => {
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
       <Typography variant="h4" gutterBottom> Betting Odds </Typography>
@@ -33,7 +19,7 @@ const BettingOdds: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {bettingOdds.map((game, index) => (
+            {odds.filter((_, index) => index % 10 === 0).map((game, index) => (
               <TableRow key={index} hover>
                 <TableCell>{game.matchup}</TableCell>
                 <TableCell align="right">{game.home_odds}</TableCell>
@@ -47,4 +33,25 @@ const BettingOdds: React.FC = () => {
   );
 };
 
-export default BettingOdds;
+const BettingOddsContainer: React.FC = () => {
+  const [bettingOdds, setBettingOdds] = useState<{ matchup: string; home_odds: number; away_odds: number }[]>([]);
+
+  useEffect(() => {
+    const fetchOdds = async () => {
+      try {
+        const response = await fetch('/api/odds');
+        console.log('fetchOdds response sent...');
+        const result = await response.json();
+        console.log('fetchOdds response received:', result);
+        setBettingOdds(result);
+      } catch (error) {
+        console.error('Error fetching betting odds:', error);
+      }
+    };
+    fetchOdds();
+  }, []);
+
+  return <BettingOdds odds={bettingOdds} />;
+};
+
+export default BettingOddsContainer;

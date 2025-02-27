@@ -2,6 +2,7 @@
   "compilerOptions": {
     /* Language and Environment */
     "target": "ES2020" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "noEmitOnError": false /* Enable error checking before emitting JavaScript. */,
 
     /* Modules */
     "module": "ESNext" /* Specify what module code is generated. */,
@@ -27,5 +28,6 @@
     "noImplicitOverride": true /* Ensure overriding members in derived classes are marked with an override modifier. */,
     "useUnknownInCatchVariables": true /* Ensure 'unknown' is used for catch clause variables. */
   },
-  "outDir": "./dist" /* Redirect output structure to the directory. */
+  "outDir": "./dist" /* Redirect output structure to the directory. */,
+  "include": ["src", "express.d.ts"]
 }

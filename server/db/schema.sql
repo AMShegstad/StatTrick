@@ -1,4 +1,4 @@
-CREATE DATABASE stattrick_db;
+_dataCREATE DATABASE stattrick_db;
 
 \c stattrick_db;
 
@@ -6,7 +6,6 @@ CREATE DATABASE stattrick_db;
 CREATE TABLE IF NOT EXISTS user_data (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     favorite_team VARCHAR(255) NOT NULL
 );
@@ -57,5 +56,3 @@ CREATE TABLE IF NOT EXISTS player_stats (
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
 );
-
-\i seeds.sql

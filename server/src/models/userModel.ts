@@ -1,8 +1,9 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
-import { Player } from './playerModel.js';
+import { DataTypes, Model, Sequelize } from "sequelize";
+import { Player } from "./playerModel.js";
+import bcrypt from "bcrypt";
 
 export interface UserData {
-    id: number;
+    id?: number;
     username: string;
     password: string;
     email: string;
@@ -16,10 +17,16 @@ export class User extends Model<UserData> implements UserData {
     declare email: string;
     declare favorite_team: string;
 
-     // Explicitly declare Sequelize-generated methods
-     declare addFavoritePlayer: (player: Player) => Promise<void>;
-     declare removeFavoritePlayer: (player: Player) => Promise<void>;
-     declare getFavoritePlayers: () => Promise<Player[]>;
+  // Explicitly declare Sequelize-generated methods
+  declare addFavoritePlayer: (player: Player) => Promise<void>;
+  declare removeFavoritePlayer: (player: Player) => Promise<void>;
+  declare getFavoritePlayers: () => Promise<Player[]>;
+
+  // Hash the password before saving the user
+  public async setPassword(password: string) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(password, saltRounds);
+  }
 }
 
 export function UserFactory(sequelize: Sequelize): typeof User {
@@ -33,7 +40,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
             username: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                unique: true,
+                unique: false,
                 validate: {
                     len: {
                         args: [3, 16],
@@ -42,9 +49,6 @@ export function UserFactory(sequelize: Sequelize): typeof User {
                     notNull: {
                         msg: 'Please enter a username',
                     },
-                    unique: {
-                        msg: 'Username already exists',
-                    }
                 }
             },
             password: {
@@ -85,5 +89,5 @@ export function UserFactory(sequelize: Sequelize): typeof User {
         }
     );
 
-    return User;
+  return User;
 }

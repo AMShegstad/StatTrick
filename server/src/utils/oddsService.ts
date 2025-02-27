@@ -43,7 +43,7 @@ export default class OddsService {
   static async getOdds(): Promise<Array<Odds>> {
     const oddsURL = `https://odds.p.rapidapi.com/v4/sports/icehockey_nhl/odds?regions=us&oddsFormat=american&dateFormat=iso`;
     //retrives odds for the next 8 games from the chosen sport, in our case, the National Hockey League.
-    
+    /*
     try {
       const response = await fetch(oddsURL, {
         headers: {
@@ -55,8 +55,7 @@ export default class OddsService {
             "Host": process.env.HOST as string,
           },
         });
-        
-        /*
+        */
         try {
           const response = await fetch(oddsURL, {
               headers: {
@@ -67,7 +66,7 @@ export default class OddsService {
                   "Host": "odds.p.rapidapi.com",
               },
           });
-        */
+        
 
         // Handle potential errors.
         if (!response.ok) {

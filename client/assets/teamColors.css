@@ -226,3 +226,8 @@ Team city names are capitalized and are classes, not IDs.
 --color-3: #C8102E;
 --color-4: #000000;
 }
+
+body {
+    background-color: var(--color-1);
+    color: var(--color-2);
+  }
