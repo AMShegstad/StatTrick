@@ -1,36 +1,31 @@
-import type { Request, Response, NextFunction } from 'express';
+// filepath: /C:/Users/Alex's Lenovo/bootcamp/StatTrick_v6/StatTrick/server/src/middleware/auth.ts
+import { Request, Response, NextFunction } from 'express';
+//import type { Request, Response, NextFunction } from 'express';
+
+import { JwtPayload } from 'jsonwebtoken';
 
 interface CustomRequest extends Request {
   user?: JwtPayload;
 }
 import jwt from 'jsonwebtoken';
-// import { User as UserModel } from '../models/user'; 
 
-interface JwtPayload {
-  req: CustomRequest,
-}
+const authenticationToken = (req: CustomRequest, res: Response, next: NextFunction) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1] || '';
+  const secretKey = process.env.JWT_SECRET_KEY || '';
 
-export const authenticateToken = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const authHeader = req.headers.authorization;
-
-  if (authHeader) {
-    const token = authHeader.split(' ')[1];
-
-    const secretKey = process.env.JWT_SECRET_KEY || '';
-
-    jwt.verify(token, secretKey, (err, user) => {
-      if (err) {
-        return res.sendStatus(403); // Forbidden
-      }
-
-      (req as CustomRequest).user = user as JwtPayload;
-      return next();
-    });
-  } else {
+  if (!token) {
     res.sendStatus(401); // Unauthorized
   }
+
+  jwt.verify(token, secretKey, (err, user) => {
+    if (err || !user) {
+      res.sendStatus(403); // Forbidden
+    }
+
+    (req as any).user = user;
+    next();
+  });
 };
+
+export default authenticationToken;

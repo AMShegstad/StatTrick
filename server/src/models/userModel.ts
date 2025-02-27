@@ -1,27 +1,23 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { Player } from './playerModel.js';
-
 export interface UserData {
-    id: number;
+    id?: number;
     username: string;
     password: string;
     email: string;
     favorite_team: string;
 };
-
 export class User extends Model<UserData> implements UserData {
     declare id: number;
     declare username: string;
     declare password: string;
     declare email: string;
     declare favorite_team: string;
-
      // Explicitly declare Sequelize-generated methods
      declare addFavoritePlayer: (player: Player) => Promise<void>;
      declare removeFavoritePlayer: (player: Player) => Promise<void>;
      declare getFavoritePlayers: () => Promise<Player[]>;
 }
-
 export function UserFactory(sequelize: Sequelize): typeof User {
     User.init(
         {
@@ -84,6 +80,5 @@ export function UserFactory(sequelize: Sequelize): typeof User {
             modelName: 'User',
         }
     );
-
     return User;
 }

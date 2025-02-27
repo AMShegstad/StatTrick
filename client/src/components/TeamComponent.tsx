@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+/*import React, { useEffect } from 'react';
 import { Team } from '../../../server/src/models/teamModel';
-import { teams } from '../../../server/src/classes/cities';
+
 
 const fetchTeamData = async (team: Team, onDataFetched: (data: Team) => void) => {
     try {
@@ -8,7 +8,7 @@ const fetchTeamData = async (team: Team, onDataFetched: (data: Team) => void) =>
         const data = await response.json();
         const teamDataFromApi = data.standings.find(
             (record: { teamAbbrev: { default: string }; wins: number; losses: number; otLosses: number; points: number; gamesPlayed: number }) =>
-                record.teamAbbrev?.default === team.triCode
+                record.teamAbbrev?.default === team.tri_code
         );
 
         if (teamDataFromApi) {
@@ -56,3 +56,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+*/

@@ -1,6 +1,5 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { Player } from './playerModel.js';
-
 export interface PlayerStatsInfo {
     player_id: number;
     points?: number;
@@ -10,7 +9,6 @@ export interface PlayerStatsInfo {
     save_pctg?: number;
     goals_against_avg?: number;
 }
-
 export class PlayerStats extends Model<PlayerStatsInfo> implements PlayerStatsInfo {
     public player_id!: number;
     public points?: number;
@@ -20,17 +18,15 @@ export class PlayerStats extends Model<PlayerStatsInfo> implements PlayerStatsIn
     public save_pctg?: number;
     public goals_against_avg?: number;
 }
-
 export function PlayerStatsFactory(sequelize: Sequelize): typeof PlayerStats {
     PlayerStats.init(
         {
             player_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
-                field: "playerID",
                 references: {
                     model: Player,
-                    key: 'playerID',
+                    key: 'player_id',
                 },
                 onDelete: 'CASCADE',
             },
@@ -49,26 +45,22 @@ export function PlayerStatsFactory(sequelize: Sequelize): typeof PlayerStats {
             plus_minus: {
                 type: DataTypes.INTEGER,
                 allowNull: true,
-                field: "plusMinus",
             },
             save_pctg: {
                 type: DataTypes.DECIMAL(5, 4),
                 allowNull: true,
-                field: "savePctg",
             },
             goals_against_avg: {
                 type: DataTypes.DECIMAL(5, 4),
                 allowNull: true,
-                field: "goalsAgainstAvg",
             },
         },
         {
             sequelize,
             modelName: 'PlayerStats',
             tableName: 'player_stats',
-            timestamps: true,
+            timestamps: false,
         }
     );
-
     return PlayerStats;
 }

@@ -1,4 +1,4 @@
-import { Player } from '../../models/index.js'; // Import User and Player models
+import { Player } from '../models/index.js'; // Import User and Player models
 import { Op } from 'sequelize'; // Import Sequelize operators
 import express, { Request, Response } from 'express';  // Import express and its types
 import axios from 'axios';

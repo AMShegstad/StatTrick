@@ -1,5 +1,4 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-
 export interface PlayerInfo {
     player_id: number;
     first_name: string;
@@ -9,7 +8,6 @@ export interface PlayerInfo {
     headshot: string;
     sweater_number: number;
 }
-
 export class Player extends Model<PlayerInfo> implements PlayerInfo {
     public player_id!: number;
     public first_name!: string;
@@ -19,7 +17,6 @@ export class Player extends Model<PlayerInfo> implements PlayerInfo {
     public headshot!: string;
     public sweater_number!: number;
 }
-
 export function PlayerFactory(sequelize: Sequelize): typeof Player {
     Player.init(
         {
@@ -51,7 +48,6 @@ export function PlayerFactory(sequelize: Sequelize): typeof Player {
             position_code: {
                 type: DataTypes.STRING,
                 allowNull: false,
-
             },
             sweater_number: {
                 type: DataTypes.INTEGER,
@@ -65,6 +61,5 @@ export function PlayerFactory(sequelize: Sequelize): typeof Player {
             timestamps: false,
         }
     );
-
     return Player;
 }
