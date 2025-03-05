@@ -1,6 +1,10 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 import { User } from '../../models/index.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const router = express.Router();
 
@@ -13,6 +17,7 @@ router.get('/', async (_req: Request, res: Response) => {
     res.json(users);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
+    return;
   }
 });
 
@@ -34,13 +39,76 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 // POST /users - Create a new user
-router.post('/', async (req: Request, res: Response) => {
-  const { username, email, password, favorite_team} = req.body;
+router.post('/register', async (req: Request, res: Response) => {
   try {
-    const newUser = await User.create({ username, email, password, favorite_team  });
-    res.status(201).json(newUser);
+  const { username, email, password, favorite_team} = req.body;
+  // Check if user exists before creation
+  const existingUser = await User.findOne({ where: { email } });
+  if (existingUser) {
+    res.status(400).json({ message: 'User already exists' });
+  }
+
+  // Hash password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // Create the new user
+  const newUser = await User.create({
+     username, 
+     email, 
+     password: hashedPassword, 
+     favorite_team  });
+    
+     res.status(201).json(newUser);
+     console.log('User created successfully:', newUser);
+
   } catch (error: any) {
+    
     res.status(400).json({ message: error.message });
+  }
+});
+
+// POST /users/login - Login a user
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // **Find user by email**
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // **Compare password with hashed password**
+    const isPasswordValid = await bcrypt.compare(password, user!.password);
+    if (!isPasswordValid) {
+      res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // **Ensure JWT secret is set**
+    if (!process.env.JWT_SECRET_KEY) {
+      console.error('❌ Missing JWT_SECRET_KEY in environment variables.');
+      res.status(500).json({ error: 'Internal server error' });
+    }
+
+    // **Ensure JWT secret is set**
+    const secretKey = process.env.JWT_SECRET_KEY;
+    if (!secretKey) {
+      console.error('❌ Missing JWT_SECRET_KEY in environment variables.');
+      res.status(500).json({ error: 'Internal server error' });
+      return;
+    }
+
+    // **Generate JWT**
+    const token = jwt.sign(
+      { id: user!.id, username: user!.username, favorite_team: user!.favorite_team },
+      secretKey,
+      { expiresIn: '1h' }
+    );
+
+    res.json({ message: 'Login successful', token, favorite_team: user!.favorite_team });
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 

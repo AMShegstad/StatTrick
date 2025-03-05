@@ -1,40 +1,45 @@
-import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Button, Container } from "@mui/material";
-import { useState } from "react";
-import LoginPage from "../pages/LoginPage";
+import { Link, useLocation } from "react-router-dom";
+import { Nav } from "react-bootstrap";
+
 
 const Navbar: React.FC = () => {
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const handleLoginClick = () => {
-    setShowLoginModal(true);
-  };
+  const currentPage = useLocation().pathname;
 
   return (
-    <>
-      <AppBar position="static" sx={{ backgroundColor: "#1976d2" }}>
-        <Container maxWidth="lg">
-          <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-            <div>
-              <Button color="inherit" component={Link} to="/">Home</Button>
-              <Button color="inherit" component={Link} to="/favorites">Favorites</Button>
-              <Button color="inherit" component={Link} to="/standings">Standings</Button>
-              <Button color="inherit" component={Link} to="/betting-odds">Betting Odds</Button>
-            </div>
-            <Button color="inherit" onClick={handleLoginClick}>Login</Button>
-          </Toolbar>
-        </Container>
-      </AppBar>
-      {showLoginModal && (
-        <LoginPage
-          showModal={showLoginModal}
-          setShowModal={setShowLoginModal}
-          onLoginSuccess={() => console.log("Login successful")}
-          onShowRegister={() => console.log("Show register")}
-        />
-      )}
-    </>
+      <Nav className="justify-content-center" variant="tabs" defaultActiveKey='/'>
+        <Nav.Item>
+              <Nav.Link
+               as={Link}
+               to="/"
+               className={currentPage === '/' ? 'nav-link active' : 'nav-link'}>Home</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+              <Nav.Link
+               as={Link}
+               to="/favorites"
+               className={currentPage === '/favorites' ? 'nav-link active' : 'nav-link'}>Favorites</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+              <Nav.Link
+               as={Link}
+               to="/standings"
+               className={currentPage === '/standings' ? 'nav-link active' : 'nav-link'}>Standings</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+              <Nav.Link
+               as={Link}
+               to="/betting-odds"
+               className={currentPage === '/betting-odds' ? 'nav-link active' : 'nav-link'}>Betting Odds</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+              <Nav.Link
+               as={Link}
+               to="/login"
+               className={currentPage === '/login' ? 'nav-link active' : 'nav-link'}>Login</Nav.Link>
+        </Nav.Item>
+      </Nav>
   );
-};
+}
 
 export default Navbar;

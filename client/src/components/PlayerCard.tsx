@@ -1,108 +1,81 @@
-import React, { useEffect, useState } from 'react';
-import { Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Card, Button, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 
 interface PlayerCardProps {
-  player_id: number;
-  team_abbreviation: string;
-  isFavorite: boolean;
-  onToggleFavorite: (playerID: number) => void;
+  player: {
+    id: number;
+    first_name: string;
+    last_name: string;
+    position_code: string;
+    team: string;
+    headshot_url: string; // Assuming you have the headshot URL
+    stats: {
+      goals?: number;
+      assists?: number;
+      points?: number;
+      savePercentage?: number;
+      goalsAgainstAvg?: number;
+    };
+  };
+  userId: number;  // The ID of the logged-in user
 }
 
-const PlayerCard: React.FC<PlayerCardProps> = ({ player_id, team_abbreviation, isFavorite, onToggleFavorite }) => {
-  const [player, setPlayer] = useState<any>(null); // Store player data
-  const [playerStats, setPlayerStats] = useState<any>(null); // Store player stats
+const PlayerCard: React.FC<PlayerCardProps> = ({ player, userId }) => {
+  const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
-  useEffect(() => {
-    const fetchPlayerData = async () => {
-      try {
-        // Fetch player data from your backend or API
-        const playerResponse = await axios.get(`/api/players/${player_id}`);
-        setPlayer(playerResponse.data);
+  // Function to handle adding player to favorites
+  const handleAddToFavorites = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:3001/api/favorites/${userId}/${player.id}`
+      );
+      setIsFavorited(true);  // Update the state to indicate the player is favorited
+      console.log(response.data.message);  // Log success message from backend
+    } catch (error) {
+      console.error('Error adding player to favorites:', error);
+    }
+  };
 
-        // Fetch player stats using teamAbbreviation to get stats for the team
-        const statsResponse = await axios.get(`/api/player-stats/${team_abbreviation}`);
-        
-        // Log the response to understand the structure
-        console.log("Stats Response:", statsResponse.data);
-
-        // Check if the player is in the skaters or goalies array
-        let stats;
-        if (statsResponse.data.skaters) {
-          stats = statsResponse.data.skaters.find((stat: any) => stat.playerId === player_id);
-        }
-        if (!stats && statsResponse.data.goalies) {
-          stats = statsResponse.data.goalies.find((stat: any) => stat.playerId === player_id);
-        }
-
-        // If no stats found for the player, return early or handle gracefully
-        if (!stats) {
-          console.error("Player stats not found in the response");
-        }
-
-        setPlayerStats(stats);
-      } catch (error) {
-        console.error('Error fetching player data or stats:', error);
-      }
-    };
-
-    fetchPlayerData();
-  }, [player_id, team_abbreviation]);
-
-  if (!player || !playerStats) return <div>Loading...</div>;
-
-  const {
-    first_name,
-    last_name,
-    headshot,
-    position_code,
-    points,
-    goals,
-    assists,
-    plus_minus,
-    save_pctg,
-    goals_against_avg,
-  } = playerStats;
-
-  const skaterStats = (
-    <>
-      <ListGroupItem>Goals: {goals}</ListGroupItem>
-      <ListGroupItem>Assists: {assists}</ListGroupItem>
-      <ListGroupItem>Plus/Minus: {plus_minus}</ListGroupItem>
-    </>
-  );
-
-  const goalieStats = (
-    <>
-      <ListGroupItem>Save Percentage: {save_pctg}</ListGroupItem>
-      <ListGroupItem>Goals Against Average: {goals_against_avg}</ListGroupItem>
-    </>
-  );
+  // Rendering stats based on player position (goalie vs non-goalie)
+  const renderStats = () => {
+    if (player.position_code === 'G') {
+      return (
+        <div>
+          <p>Save Percentage: {player.stats.savePercentage}</p>
+          <p>Goals Against Average: {player.stats.goalsAgainstAvg}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <p>Goals: {player.stats.goals}</p>
+          <p>Assists: {player.stats.assists}</p>
+          <p>Points: {player.stats.points}</p>
+        </div>
+      );
+    }
+  };
 
   return (
-    <Card style={{ width: '18rem', marginBottom: '20px' }}>
-      <Card.Img variant="top" src={headshot || '/default-image.png'} />
-      <Card.Body>
-        <Card.Title>{`${first_name} ${last_name}`}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">
-          Team: {team_abbreviation} | Position: {position_code}
-        </Card.Subtitle>
-        <Card.Text>
-          <strong>Points: </strong>{points}
-        </Card.Text>
-
-        <ListGroup className="list-group-flush">
-          {position_code === 'G' ? goalieStats : skaterStats}
-        </ListGroup>
-
-        <Button
-          variant={isFavorite ? 'danger' : 'primary'}
-          onClick={() => onToggleFavorite(player_id)}
-        >
-          {isFavorite ? 'Unfavorite' : 'Favorite'}
-        </Button>
-      </Card.Body>
-    </Card>
+    <Col sm={12} md={6} lg={4}>
+      <Card className="mb-4">
+        <Card.Img variant="top" src={player.headshot_url} alt={`${player.first_name} ${player.last_name}`} />
+        <Card.Body>
+          <Card.Title>{`${player.first_name} ${player.last_name}`}</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">{player.team}</Card.Subtitle>
+          <Card.Text>Position: {player.position_code}</Card.Text>
+          {renderStats()}
+          <Button
+            variant={isFavorited ? 'success' : 'primary'}
+            onClick={handleAddToFavorites}
+            disabled={isFavorited}
+          >
+            {isFavorited ? 'Added to Favorites' : 'Add to Favorites'}
+          </Button>
+        </Card.Body>
+      </Card>
+    </Col>
   );
 };
 

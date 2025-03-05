@@ -1,7 +1,8 @@
 import { Player } from '../../models/index.js'; // Import User and Player models
+import { PlayerStats } from '../../models/index.js'; // Import PlayerStats model
+// import { User } from '../../models/index.js'; // Import User model
 import { Op } from 'sequelize'; // Import Sequelize operators
 import express, { Request, Response } from 'express';  // Import express and its types
-import axios from 'axios';
 
 // const app = express();
 const router = express.Router();
@@ -14,25 +15,6 @@ router.get('/', async (_req, res) => {  // Changed '/players' to '/' for consist
     } catch (error) {
         console.error('❌ Error retrieving players:', error);
         res.status(500).send('Error retrieving players');
-    }
-});
-
-// Endpoint to fetch player stats for a given team abbreviation
-router.get('/player-stats/:teamAbbreviation', async (req, res) => {
-    const { teamAbbreviation } = req.params;
-  
-    try {
-        // Fetch stats for the team using the team abbreviation
-        const response = await axios.get(`https://api-web.nhle.com/v1/club-stats/${teamAbbreviation}/now`);
-        
-        // Get skaters and goalies stats
-        const { skaters, goalies } = response.data;
-    
-        // Send back the stats data for skaters and goalies
-        res.json({ skaters, goalies });
-    } catch (error) {
-        console.error(`Error fetching player stats for team ${teamAbbreviation}:`, error);
-        res.status(500).json({ message: 'Error fetching player stats' });
     }
 });
 
@@ -103,5 +85,27 @@ router.get('/players/:player_id', async (req, res) => {
         res.status(500).json({ message: 'Error fetching player data' });
     }
 });
+
+// GET /api/player-stats/:player_id - Get player stats by player ID
+router.get('/player-stats/:player_id', async (req: Request, res: Response) => {
+    const { player_id } = req.params;
+  
+    try {
+      // Find player stats by player ID
+      const player_stats = await PlayerStats.findOne({
+        where: { player_id },
+      });
+  
+      if (!player_stats) {
+        res.status(404).json({ message: 'Player stats not found' });
+      }
+  
+      // Return the player stats
+      res.json(player_stats);
+    } catch (error) {
+      console.error('Error fetching player stats:', error);
+      res.status(500).json({ message: 'Error fetching player stats' });
+    }
+  });
 
 export { router as playerRoutes };

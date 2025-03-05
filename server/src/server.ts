@@ -5,8 +5,15 @@ import { sequelize } from './config/connection.js';
 import fetchAndStoreRosters from './utils/fetchAndStoreRosters.js';
 import updatePlayerStats from './utils/updatePlayerStats.js';
 import { seedTeams } from './seeds/teams-seed.js';
+import cors from 'cors';
 
 dotenv.config();
+
+app.use(cors({
+  origin: 'http://localhost:5173',  // Allow requests only from your frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin: *'],  // Allow specific headers
+}));
 
 // Serves static files in the entire client's dist folder
 app.use(express.static('../client/dist'));
@@ -30,10 +37,6 @@ async function startServer() {
   try {
     await setupDatabase(); // First, ensure teams are seeded
     await sequelize.sync({ force: false }); // Ensure sync happens after DB tasks
-
-    // app.listen(PORT, () => {
-    //   console.log(`Server is listening on port ${PORT}`);
-    // });
 
     // Run the time-consuming tasks asynchronously after the server starts
     runBackgroundTasks();
