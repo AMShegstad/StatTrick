@@ -7,7 +7,7 @@ import authRoutes from './authRoutes.js';
 import { teamRoutes } from './api/teams-routes.js';
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3001;
 
 app.use('/api/players', playerRoutes);
 app.use('/api/users', userRouter);

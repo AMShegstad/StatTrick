@@ -54,4 +54,38 @@ const BettingOddsContainer: React.FC = () => {
   return <BettingOdds odds={bettingOdds} />;
 };
 
+// This was copied from App.tsx
+
+// useEffect(() => {
+//   const fetchOdds = async () => {
+//     try {
+//       const response = await fetch(
+//         "https://odds.p.rapidapi.com/v4/sports/upcoming/odds?regions=us&markets",
+//         {
+//           headers: {
+//             "x-rapidapi-key": "d818cb5b36mshc66975bd6b0c2c9p1a5e37jsn2e209b594a82",
+//             "x-rapidapi-host": "odds.p.rapidapi.com",
+//           },
+//         }
+//       );
+//       if (!response.ok) {
+//         throw new Error(`Failed to fetch data (Status: ${response.status})`);
+//       }
+//       const data = await response.json();
+//       console.log("Betting Odds API Response:", data);
+//       setOdds(data);
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//     }
+//   };
+//   fetchOdds();
+// }, []);
+// function convertToAmericanOdds(decimalOdds: number): string {
+//   if (decimalOdds >= 2.0) {
+//     return `+${Math.round((decimalOdds - 1) * 100)}`;
+//   } else {
+//     return `${Math.round(-100 / (decimalOdds - 1))}`;
+//   }
+// }
+
 export default BettingOddsContainer;

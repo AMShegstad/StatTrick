@@ -1,7 +1,6 @@
-import { useState, type FormEvent, type ChangeEvent } from 'react';
+import { useState, useEffect, type FormEvent, type ChangeEvent } from 'react';
 import { Container, TextField, Button, Paper, Typography, Box, MenuItem, Select, InputLabel, FormControl, SelectChangeEvent } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import teams from '../data/teams'; // Import the list of teams
 
 interface RegisterPageProps {
   onRegisterSuccess: () => void;
@@ -9,7 +8,34 @@ interface RegisterPageProps {
 
 const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
   const [formData, setFormData] = useState({ username: '', password: '', email: '', favoriteTeam: '' });
+  const [teams, setTeams] = useState<{ id: number; team_name: string }[]>([]); // state to store teams
   const navigate = useNavigate();
+
+  // Fetch teams from the API when the component mounts
+  useEffect(() => {
+    const fetchTeams = async () => {
+      try {
+  const response = await fetch('http://localhost:3001/api/teams', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    mode: 'no-cors',
+  });
+  console.log(response);
+        if (response.ok) {
+          const data = await response.json();
+          setTeams(data); // Update state with teams from the database
+        } else {
+          console.error('Failed to fetch teams');
+        }
+      } catch (error) {
+        console.error('Error fetching teams:', error);
+      }
+    };
+
+    fetchTeams();
+  }, []);  // Run once when the component mounts
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
     const { name, value } = e.target;
@@ -19,7 +45,6 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     console.log('Submitting registration form with data:', formData);
-    console.log(formData);
     try {
       const response = await fetch('http://localhost:3001/api/auth/register', {
         method: 'POST',
@@ -28,7 +53,6 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
         },
         body: JSON.stringify(formData)
       });
-      console.log('Server response:', response);
 
       if (response.ok) {
         const data = await response.json();
@@ -62,8 +86,11 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
               onChange={handleChange}
               label="Favorite Team"
             >
+              {/* Populate dropdown with teams from the database */}
               {teams.map((team) => (
-                <MenuItem key={team} value={team}>{team}</MenuItem>
+                <MenuItem key={team.id} value={team.team_name}>
+                  {team.team_name}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
