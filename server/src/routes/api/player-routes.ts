@@ -1,13 +1,13 @@
-import { Player } from '../models/index.js'; // Import User and Player models
+import { Player } from '../../models/index.js'; // Import User and Player models
 import { Op } from 'sequelize'; // Import Sequelize operators
 import express, { Request, Response } from 'express';  // Import express and its types
 import axios from 'axios';
 
-const app = express();
+// const app = express();
 const router = express.Router();
 
 // API route to retrieve all players
-router.get('/players', async (_req, res) => {
+router.get('/', async (_req, res) => {  // Changed '/players' to '/' for consistency
     try {
         const players = await Player.findAll();  // Retrieve all players from the database
         res.json(players);  // Return the players as JSON response
@@ -103,7 +103,5 @@ router.get('/players/:player_id', async (req, res) => {
         res.status(500).json({ message: 'Error fetching player data' });
     }
 });
-
-app.use('/api', router); // Use the router under the `/api` base URL
 
 export { router as playerRoutes };

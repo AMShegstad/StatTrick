@@ -30,10 +30,10 @@ async function fetchAndStoreRosters() {
       console.log(`Successfully added/updated players for team: ${team.tri_code}`);
     } catch (error) {
       const errorMessage = (error as any).message;
-      console.error(`:x: Error fetching roster for ${team.tri_code}:`, errorMessage);
+      console.error(`❌ Error fetching roster for ${team.tri_code}:`, errorMessage);
     }
   }
-  console.log(':white_check_mark: All rosters have been fetched and stored.');
+  console.log('✅ All rosters have been fetched and stored.');
 }
 fetchAndStoreRosters();
 export default fetchAndStoreRosters;

@@ -1,16 +1,19 @@
-import { Router } from 'express';
-import { playerRoutes } from './player-routes.js';
-import { userRouter } from './user-routes.js';
-import favoriteRoutes from './favorite-routes.js';
-import oddsRoutes from './oddsRoutes.js';
+import express from 'express';
+import { playerRoutes } from './api/player-routes.js';
+import { userRouter } from './api/user-routes.js';
+import favoriteRoutes from './api/favorite-routes.js';
+import oddsRoutes from './api/oddsRoutes.js';
 import authRoutes from './authRoutes.js';
+import { teamRoutes } from './api/teams-routes.js';
 
-const router = Router();
+const app = express();
+const PORT = process.env.PORT || 4000;
 
-router.use('/players', playerRoutes);
-router.use('/users', userRouter);
-router.use('/favorites', favoriteRoutes);
-router.use('/auth', authRoutes);
-router.use('/odds', oddsRoutes);
+app.use('/api/players', playerRoutes);
+app.use('/api/users', userRouter);
+app.use('/api/favorites', favoriteRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/odds', oddsRoutes);
+app.use('/api/teams', teamRoutes);
 
-export default router;
+export { app, PORT };
