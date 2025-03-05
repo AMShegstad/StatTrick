@@ -37,6 +37,6 @@ PlayerStats.belongsTo(Player, {
     onDelete: 'CASCADE',
 });
 sequelize.sync()
-    .then(() => console.log(':white_check_mark: Models have been successfully synced.'))
-    .catch((err) => console.error(':x: Error syncing models:', err));
+    .then(() => console.log('✅ Models have been successfully synced.'))
+    .catch((err) => console.error('❌ Error syncing models:', err));
 export { sequelize, User, Player, Team, PlayerStats };

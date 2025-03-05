@@ -1,5 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 export interface TeamInfo {
+    team_id: number;
     tri_code: string;
     city: string;
     team_name: string;
@@ -7,6 +8,7 @@ export interface TeamInfo {
     class_name: string;
 }
 export class Team extends Model<TeamInfo> implements TeamInfo {
+    public team_id!: number;
     public tri_code!: string;
     public city!: string;
     public team_name!: string;
@@ -16,6 +18,10 @@ export class Team extends Model<TeamInfo> implements TeamInfo {
 export function TeamFactory(sequelize: Sequelize): typeof Team {
     Team.init(
         {
+            team_id: {
+                type: DataTypes.INTEGER,
+                autoIncrement: true,
+            },
             tri_code: {
                 type: DataTypes.STRING,
                 primaryKey: true,

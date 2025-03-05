@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import OddsService from '../utils/oddsService.js';
+import OddsService from '../../utils/oddsService.js';
 
 const router = Router();
 

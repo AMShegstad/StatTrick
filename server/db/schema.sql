@@ -8,15 +8,16 @@ CREATE TABLE IF NOT EXISTS user_data (
     email VARCHAR(255) NOT NULL,
     favorite_team VARCHAR(255) NOT NULL
 );
--- Create the teams table
+
 CREATE TABLE IF NOT EXISTS teams (
+    team_id SERIAL,
     tri_code VARCHAR(3) PRIMARY KEY, -- Team abbreviation, e.g., 'MIN' for Minnesota
     city VARCHAR(255) NOT NULL, -- City where the team is located
     team_name VARCHAR(255) NOT NULL, -- Full team name, e.g., 'Minnesota Wild'
     team_logo VARCHAR(255), -- URL for the team's logo
     class_name VARCHAR(255) -- Class name for the team's logo
 );
--- Create the players table
+
 CREATE TABLE IF NOT EXISTS players (
     player_id INT PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
@@ -30,7 +31,8 @@ CREATE TABLE IF NOT EXISTS players (
     -- Foreign Key linking to the teams table
     FOREIGN KEY (team_abbreviation) REFERENCES teams(tri_code) ON DELETE CASCADE
 );
--- Create the user_favorites table to store the relationship between users and their favorite players
+
+
 CREATE TABLE IF NOT EXISTS user_favorites (
     user_id INTEGER NOT NULL,
     player_id INTEGER NOT NULL,
@@ -38,6 +40,7 @@ CREATE TABLE IF NOT EXISTS user_favorites (
     FOREIGN KEY (user_id) REFERENCES user_data(id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
 );
+
 CREATE TABLE IF NOT EXISTS player_stats (
     player_id INTEGER NOT NULL PRIMARY KEY,
     points INT DEFAULT 0,
@@ -50,4 +53,3 @@ CREATE TABLE IF NOT EXISTS player_stats (
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
 );
-\i seeds.sql
