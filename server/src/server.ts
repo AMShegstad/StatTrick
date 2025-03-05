@@ -1,24 +1,12 @@
 import dotenv from 'dotenv';
-import express from 'express';
 import { app, PORT } from './routes/index.js';
 import { sequelize } from './config/connection.js';
 import fetchAndStoreRosters from './utils/fetchAndStoreRosters.js';
 import updatePlayerStats from './utils/updatePlayerStats.js';
 import { seedTeams } from './seeds/teams-seed.js';
-import cors from 'cors';
+
 
 dotenv.config();
-
-app.use(cors({
-  origin: 'http://localhost:5173',  // Allow requests only from your frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin: *'],  // Allow specific headers
-}));
-
-// Serves static files in the entire client's dist folder
-app.use(express.static('../client/dist'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // This function will handle seeding and database updates asynchronously in the background
 async function setupDatabase() {
