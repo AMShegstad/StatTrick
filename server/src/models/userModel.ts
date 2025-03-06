@@ -38,9 +38,6 @@ export function UserFactory(sequelize: Sequelize): typeof User {
                     notNull: {
                         msg: 'Please enter a username',
                     },
-                    unique: {
-                        msg: 'Username already exists',
-                    }
                 }
             },
             password: {
@@ -78,6 +75,7 @@ export function UserFactory(sequelize: Sequelize): typeof User {
             sequelize,
             tableName: 'user_data',
             modelName: 'User',
+            timestamps: false,
         }
     );
     return User;
