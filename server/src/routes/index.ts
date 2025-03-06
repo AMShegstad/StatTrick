@@ -10,7 +10,7 @@ import { teamRoutes } from './api/teams-routes.js';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Apply Middleware BEFORE Routes
+Apply Middleware BEFORE Routes
 app.use(cors({
   origin: 'http://localhost:5173', // Allow frontend requests
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
