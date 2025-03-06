@@ -10,7 +10,7 @@ interface LoginPageProps {
   onShowRegister: () => void;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onShowRegister }) => {
+const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [error, setError] = useState<string | null>(null);  // Manage error state
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onShowRegister })
     e.preventDefault();  // Prevent default form submission behavior
 
     try {
-      const response = await fetch('http://localhost:3001/api/auth/login', {
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
