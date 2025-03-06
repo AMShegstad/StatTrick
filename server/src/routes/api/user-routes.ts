@@ -5,7 +5,7 @@ import {
   updateUser,
   deleteUser,
 } from '../../controllers/userController.js';
-import { createUser } from '../../controllers/authController.js';
+import { loginUser, createUser } from '../../controllers/authController.js';
 
 const router = express.Router();
 
@@ -16,7 +16,10 @@ router.get('/', getAllUsers);
 router.get('/:id', getUserById);
 
 // POST /users - Create a new user
-router.post('/', createUser);
+router.post('/register', createUser);
+
+// POST /users - Log in
+router.post('/login', loginUser);
 
 // PUT /users/:id - Update a user by id
 router.put('/:id', updateUser);

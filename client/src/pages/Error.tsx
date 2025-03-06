@@ -6,10 +6,10 @@ export default function ErrorPage() {
 
   return (
     <div id="error-page">
-      <h1>Oh no!</h1>
-      <p>You've been sent to the pentaly box due to an unknown error.</p>
+      <h1 style={{ textAlign: 'center' }}>Oh no!</h1>
+      <p style={{ textAlign: 'center' }}>You've been sent to the pentaly box due to an unknown error.</p>
       <p>
-        <i>{error.statusText || error.message}</i>
+        <i style={{ textAlign: 'center' }}>{error.statusText || error.message}</i>
       </p>
     </div>
   );

@@ -14,8 +14,8 @@ interface PlayerCardProps {
       goals?: number;
       assists?: number;
       points?: number;
-      savePercentage?: number;
-      goalsAgainstAvg?: number;
+      save_pctg?: number;
+      goals_against_avg?: number;
     };
   };
   userId: number;  // The ID of the logged-in user
@@ -42,8 +42,8 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ player, userId }) => {
     if (player.position_code === 'G') {
       return (
         <div>
-          <p>Save Percentage: {player.stats.savePercentage}</p>
-          <p>Goals Against Average: {player.stats.goalsAgainstAvg}</p>
+          <p>Save Percentage: {player.stats.save_pctg}</p>
+          <p>Goals Against Average: {player.stats.goals_against_avg}</p>
         </div>
       );
     } else {

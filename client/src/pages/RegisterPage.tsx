@@ -15,12 +15,11 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
   useEffect(() => {
     const fetchTeams = async () => {
       try {
-  const response = await fetch('http://localhost:3001/api/teams', {
+  const response = await fetch('/api/teams', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    mode: 'no-cors',
   });
   console.log(response);
         if (response.ok) {
@@ -46,7 +45,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
     e.preventDefault();
     console.log('Submitting registration form with data:', formData);
     try {
-      const response = await fetch('http://localhost:3001/api/auth/register', {
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
