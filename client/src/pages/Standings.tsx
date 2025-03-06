@@ -12,13 +12,13 @@ const Standings: React.FC = () => {
   const [standings] = useState(mockStandings);
 
   useEffect(() => {
-    // Replace with API call when backend is ready
-    // fetch("API_ENDPOINT").then((res) => res.json()).then((data) => setStandings(data));
+    //  Replace with API call when backend is ready
+  //   fetch('https://api-web.nhle.com/v1/standings/now').then((res) => res.json()).then((data) => setStandings(data));
   }, []);
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom> NHL Standings </Typography>
+      <Typography variant="h4" gutterBottom textAlign="center">NHL Standings</Typography>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
