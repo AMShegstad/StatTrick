@@ -41,21 +41,22 @@ export class Odds {
 
 export default class OddsService {
   static async getOdds(): Promise<Array<Odds>> {
-    const oddsURL = `https://odds.p.rapidapi.com/v4/sports/icehockey_nhl/odds?regions=us&oddsFormat=american&dateFormat=iso`;
+    const oddsURL = `https://odds.p.rapidapi.com/v4/sports/icehockey_nhl/odds?apiKey=${process.env.API_KEY}&regions=us&oddsFormat=american&dateFormat=iso`;
     //retrives odds for the next 8 games from the chosen sport, in our case, the National Hockey League.
-    /*
+    
     try {
       const response = await fetch(oddsURL, {
         headers: {
           "User-Agent": "VSCode/1.63.0",
-          "Accept": "application/json",
+          "Accept": "application/json"/*,          
           "x-rapidapi-key": process.env.RAPIDAPI_KEY as string,
             //"x-rapidapi-key": process.env.RAPIDAPI_KEY as string,
             "x-rapidapi-host": process.env.RAPIDAPI_HOST as string,
             "Host": process.env.HOST as string,
-          },
+          */},
         });
-        */
+        
+       /*
         try {
           const response = await fetch(oddsURL, {
               headers: {
@@ -66,7 +67,7 @@ export default class OddsService {
                   "Host": "odds.p.rapidapi.com",
               },
           });
-        
+        */
 
         // Handle potential errors.
         if (!response.ok) {

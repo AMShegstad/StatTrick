@@ -5,7 +5,7 @@ import  PlayerCard from '../components/PlayerCard';
 import axios from 'axios';
   const FavoritesPage: React.FC = () => {
     const [players, setPlayers] = useState([]);
-    const [userId, setUserId] = useState(1); // Example user ID
+    const [userId] = useState(1); // Example user ID
   
     useEffect(() => {
       // Fetch all players from the database

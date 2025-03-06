@@ -30,11 +30,11 @@ const router = createBrowserRouter([{
     },
     {
       path: '/login',
-      element: <LoginPage />,
+      element: <LoginPage showModal={false} setShowModal={() => {}} onLoginSuccess={() => {}} />,
     },
     {
       path: '/register',
-      element: <RegisterPage />,
+      element: <RegisterPage onRegisterSuccess={() => {}} />,
     },
     {
       path: '/betting-odds',

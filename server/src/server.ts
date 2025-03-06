@@ -1,14 +1,40 @@
 import dotenv from 'dotenv';
-import { app, PORT } from './routes/index.js';
+import express from 'express';
 import { sequelize } from './config/connection.js';
 import fetchAndStoreRosters from './utils/fetchAndStoreRosters.js';
 import updatePlayerStats from './utils/updatePlayerStats.js';
 import { seedTeams } from './seeds/teams-seed.js';
+import fs from 'fs';
+import routes from './routes/index.js'; // Adjust the path as necessary
+import { fileURLToPath } from 'url';
+import path from 'path';
 
+// Define __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+// Load environment variables from .env file
 dotenv.config();
 
-// This function will handle seeding and database updates asynchronously in the background
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// Serves static files in the entire client's dist folder
+app.use(express.static('../client/dist'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(routes);
+
+async function runSchema() {
+  const schemaPath = path.join(__dirname, '../db/schema.sql');
+  const schema = fs.readFileSync(schemaPath, 'utf8');
+  const queries = schema.split(';').filter(query => query.trim() !== '');
+
+  for (const query of queries) {
+    await sequelize.query(query);
+  }
+}
+
 async function setupDatabase() {
   try {
     console.log('🔄 Seeding teams into database...');
@@ -20,11 +46,11 @@ async function setupDatabase() {
   }
 }
 
-// Start the server
 async function startServer() {
   try {
+    await runSchema(); // Run the schema.sql file
     await setupDatabase(); // First, ensure teams are seeded
-    await sequelize.sync({ force: false }); // Ensure sync happens after DB tasks
+    await sequelize.sync({ force: true }); // Ensure sync happens after DB tasks
 
     // Run the time-consuming tasks asynchronously after the server starts
     runBackgroundTasks();

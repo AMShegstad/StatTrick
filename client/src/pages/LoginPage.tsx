@@ -8,10 +8,10 @@ interface LoginPageProps {
   showModal: boolean;
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   onLoginSuccess: () => void;
-  onShowRegister: () => void; // onShowRegister is passed as a prop
+  // onShowRegister is passed as a prop
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onShowRegister }) => {
+const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const navigate = useNavigate();  // Use useNavigate hook to handle navigation
 

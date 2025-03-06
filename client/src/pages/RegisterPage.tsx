@@ -25,7 +25,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
   console.log(response);
         if (response.ok) {
           const data = await response.json();
-          setTeams(data); // Update state with teams from the database
+          setTeams(data.teamn_name); // Update state with teams from the database
         } else {
           console.error('Failed to fetch teams');
         }

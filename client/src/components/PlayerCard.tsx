@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Button, Col, Row } from 'react-bootstrap';
+import { Card, Button, Col } from 'react-bootstrap';
 import axios from 'axios';
 
 interface PlayerCardProps {
