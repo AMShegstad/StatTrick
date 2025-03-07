@@ -42,13 +42,13 @@ class AuthService {
   // Save token to localStorage and reload the page
   login(idToken: string): void {
     localStorage.setItem('id_token', idToken); // Save token to localStorage
-    window.location.reload(); // Reload the page to update UI and auth state
+    window.location.href='/'; // Reload the page to update UI and auth state
   }
 
   // Remove token from localStorage and reload the page
   logout(): void {
     localStorage.removeItem('id_token'); // Remove token from localStorage
-    window.location.reload(); // Reload the page to update UI and clear auth state
+    window.location.href='/'; // Reload the page to update UI and clear auth state
   }
 
   // Automatically check if the user is authenticated on page load
