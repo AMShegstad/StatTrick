@@ -7,8 +7,8 @@ interface RegisterPageProps {
 }
 
 const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
-  const [formData, setFormData] = useState({ username: '', password: '', email: '', favoriteTeam: '' });
-  const [teams, setTeams] = useState<{ id: number; team_name: string }[]>([]); // state to store teams
+  const [formData, setFormData] = useState({ username: '', password: '', email: '', favorite_team: '' });
+  const [teams, setTeams] = useState<{ tri_code: number; team_name: string }[]>([]); // state to store teams
   const navigate = useNavigate();
 
   // Fetch teams from the API when the component mounts
@@ -43,7 +43,15 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    
+    // Basic validation to ensure all fields are filled
+    if (!formData.username || !formData.password || !formData.email || !formData.favorite_team) {
+      console.error('All fields are required');
+      return;  // Prevent form submission if validation fails
+    }
+  
     console.log('Submitting registration form with data:', formData);
+  
     try {
       const response = await fetch('/api/auth/register', {
         method: 'POST',
@@ -52,7 +60,7 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
         },
         body: JSON.stringify(formData)
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         console.log('Registration successful:', data);
@@ -77,22 +85,21 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess }) => {
           <TextField label="Email" name="email" type="email" fullWidth value={formData.email} onChange={handleChange} />
           <TextField label="Password" name="password" type="password" fullWidth value={formData.password} onChange={handleChange} />
           <FormControl fullWidth>
-            <InputLabel id="favorite-team-label">Favorite Team</InputLabel>
-            <Select
-              labelId="favorite-team-label"
-              name="favoriteTeam"
-              value={formData.favoriteTeam}
-              onChange={handleChange}
-              label="Favorite Team"
-            >
-              {/* Populate dropdown with teams from the database */}
-              {teams.map((team) => (
-                <MenuItem key={team.id} value={team.team_name}>
-                  {team.team_name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+  <InputLabel id="favorite-team-label">Favorite Team</InputLabel>
+  <Select
+    labelId="favorite-team-label"
+    name="favorite_team"
+    value={formData.favorite_team}
+    onChange={handleChange}
+    label="Favorite Team"
+  >
+    {teams.map((team) => (
+      <MenuItem key={team.tri_code} value={team.team_name}>
+        {team.team_name}
+      </MenuItem>
+    ))}
+  </Select>
+</FormControl>
           <Button type="submit" variant="contained" color="primary">Register</Button>
         </Box>
       </Paper>

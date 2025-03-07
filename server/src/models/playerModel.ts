@@ -40,10 +40,6 @@ export function PlayerFactory(sequelize: Sequelize): typeof Player {
             team_abbreviation: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                references: {
-                    // model: 'Team',  // Reference to 'Team' model
-                    // key: 'tri_code',
-                },
             },
             position_code: {
                 type: DataTypes.STRING,
