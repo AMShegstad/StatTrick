@@ -32,7 +32,8 @@ const HomePage: React.FC = () => {
   }, []);
 
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
+    <div style={{backgroundImage: "url('https://media.istockphoto.com/id/510723525/photo/hockey-arena.jpg?s=1024x1024&w=is&k=20&c=oNFX8wVhAn6tshBCiWoMTwQU7Y98_LnG_VYOC6Z4IOk=')", minHeight: '100vh', margin: 0, justifyContent: 'center', alignItems: 'center', backgroundSize: 'cover', backgroundPosition: 'center'}}>
+    <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Paper elevation={3} sx={{ p: 4, textAlign: "center", bgcolor: "white" }}>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 2 }}>
           <img src={NHLLogo} alt="NHL Logo" style={{ width: 50, height: 50, marginRight: 16 }} />
@@ -45,6 +46,7 @@ const HomePage: React.FC = () => {
         </Typography>
       </Paper>
     </Container>
+    </div>
   );
 };
 

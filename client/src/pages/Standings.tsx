@@ -21,7 +21,7 @@ const Standings: React.FC = () => {
 
   useEffect(() => {
     // Fetch data from the API
-    fetch('/api/teams/standings', {  // Adjust this URL as needed to match your backend endpoint
+    fetch('/api/teams/standings', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ const Standings: React.FC = () => {
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom textAlign="center">
+      <Typography variant="h4" gutterBottom textAlign="center" style={{ textShadow: "black 1px 1px 1px", marginTop: "10px", textDecoration: "underline", color: "black" }}>
         NHL Standings
       </Typography>
       {error && <Typography color="error" textAlign="center">{error}</Typography>}

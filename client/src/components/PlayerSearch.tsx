@@ -81,13 +81,14 @@ const PlayerSearch = () => {
 
   return (
     <Container className="text-center">
-      <h1 className="mb-4">Search for your favorite players</h1>
+      <h1 className="mb-4" style={{textShadow: "black 1px 1px 1px", marginTop: "10px", textDecoration: "underline", color: "white"}}>Search For Your Favorite Players!</h1>
+      <p style={{fontWeight: "bold", color: "white"}}>Type a name in the search bar to see a list of all players with a name containing your query, or use the drop-down menu on the right to see a list of all players grouped by team and click their name to add them to your favorites.</p>
       <Row className="justify-content-center">
         <Col md={5} lg={4} className="d-flex justify-content-end">
           <InputGroup className="mb-3">
             <FormControl
               type="text"
-              placeholder="Search for a player here"
+              placeholder="Search For A Player Here"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -99,12 +100,9 @@ const PlayerSearch = () => {
         <Col md={5} lg={4} className="d-flex justify-content-start">
           <Dropdown>
             <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-              Select a player from the list
+              Or Show All Players
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Header>
-                or select a player from this list
-              </Dropdown.Header>
               {Object.keys(groupedPlayers).map((team) => (
                 <div key={team}>
                   <Dropdown.Header>{team}</Dropdown.Header>
