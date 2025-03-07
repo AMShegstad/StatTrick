@@ -13,7 +13,7 @@
 
 ## Installation
 
-<p>This application is deployed on Render<a href="#"> here</a>.</p> 
+<p>This application is deployed on Render<a href="https://stattrick.onrender.com/"> here</a>.</p> 
 
 ## Troubleshooting/Questions
 <p>If you are experiencing problems with the application please open an issue on the Github repository, we will do our best to solve it as quickly as possible.</p>
