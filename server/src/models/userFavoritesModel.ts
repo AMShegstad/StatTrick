@@ -1,28 +1,28 @@
 import { DataTypes, Model, Sequelize } from "sequelize";
 
 export class UserFavorites extends Model {
-  public userID!: number;
-  public playerID!: number;
+  public id!: number;
+  public player_id!: number;
 }
 
 export function UserFavoritesFactory(sequelize: Sequelize): typeof UserFavorites {
   UserFavorites.init(
     {
-      userID: {
+      id: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'userData',
+          model: 'user_data',
           key: 'id',
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
         primaryKey: true,
       },
-      playerID: {
+      player_id: {
         type: DataTypes.INTEGER,
         references: {
           model: 'players',
-          key: 'playerid',
+          key: 'player_id',
         },
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',

@@ -5,12 +5,14 @@ export default function ErrorPage() {
   console.error(error);
 
   return (
-    <div id="error-page">
-      <h1 style={{ textAlign: 'center' }}>Oh no!</h1>
-      <p style={{ textAlign: 'center' }}>You've been sent to the pentaly box due to an unknown error.</p>
-      <p>
-        <i style={{ textAlign: 'center' }}>{error.statusText || error.message}</i>
-      </p>
+    <div id="error-page" style={{ minHeight: '100vh', margin: 0, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: 'url(https://media.istockphoto.com/id/481538109/photo/ice-hockey-referee.jpg?s=1024x1024&w=is&k=20&c=sPGn8eB_bC51zSirTvkH4AzoTf3nB4z8diULYhuLrrY=)' }}>
+      <div style={{ textAlign: 'center', color: 'white', backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: '20px', borderRadius: '10px' }}>
+        <h1>Oh no!</h1>
+        <p>You've been sent to the penalty box due to the following error:</p>
+        <p>
+          <i>{error.statusText || error.message}</i>
+        </p>
+      </div>
     </div>
   );
 }
