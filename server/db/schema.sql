@@ -34,10 +34,10 @@ CREATE TABLE IF NOT EXISTS players (
 
 
 CREATE TABLE IF NOT EXISTS user_favorites (
-    user_id INTEGER NOT NULL,
+    id INTEGER NOT NULL,
     player_id INTEGER NOT NULL,
-    PRIMARY KEY (user_id, player_id),  -- Composite primary key (userID + playerID)
-    FOREIGN KEY (user_id) REFERENCES user_data(id) ON DELETE CASCADE,
+    PRIMARY KEY (id, player_id),  -- Composite primary key (userID + playerID)
+    FOREIGN KEY (id) REFERENCES user_data(id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES players(player_id) ON DELETE CASCADE
 );
 

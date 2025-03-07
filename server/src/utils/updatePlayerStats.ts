@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { Player, PlayerStats } from '../models/index.js'; // Import both models
 async function updatePlayerStats() {
+  console.log(`🔄 Fetching stats for players`);
   try {
     // Fetch all player IDs from the database
     const players = await Player.findAll();
     for (const player of players) {
       try {
-        console.log(`🔄 Fetching current stats for ${player.first_name} ${player.last_name} of ${player.team_abbreviation}, player ID: ${player.player_id}`);
         // Fetch player stats directly using the new API endpoint
         const response = await axios.get(`https://api-web.nhle.com/v1/player/${player.player_id}/landing`);
         const stats = response.data.featuredStats.regularSeason.subSeason;
@@ -26,9 +26,8 @@ async function updatePlayerStats() {
         };
         // Insert or update stats in the player_stats table
         await PlayerStats.upsert(statData);
-        console.log(`✅ Successfully updated stats for ${player.first_name} ${player.last_name}`);
       } catch (error) {
-        console.error(`:x: Error fetching stats for player ID: ${player.player_id}`, error);
+        console.error(`❌ Error fetching stats for player ID: ${player.player_id}`, error);
       }
     }
     console.log('✅ All player stats have been updated!');

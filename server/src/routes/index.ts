@@ -6,6 +6,7 @@ import favoriteRoutes from './api/favorite-routes.js';
 import oddsRoutes from './api/oddsRoutes.js';
 import authRoutes from './authRoutes.js';
 import { teamRoutes } from './api/teams-routes.js';
+import { rosterStatRoutes } from './api/roster-stat-routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,5 +27,6 @@ app.use('/api/favorites', favoriteRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/odds', oddsRoutes);
 app.use('/api/teams', teamRoutes);
+app.use('/api/roster-stats', rosterStatRoutes);
 
 export { app, PORT };
