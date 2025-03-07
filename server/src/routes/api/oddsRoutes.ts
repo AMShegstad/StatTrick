@@ -3,7 +3,7 @@ import OddsService from '../../utils/oddsService.js';
 
 const router = Router();
 
-router.get('/odds', async (_req, res) => {
+router.get('/', async (_req, res) => {
   try {
     const odds = await OddsService.getOdds();
     res.json(odds);

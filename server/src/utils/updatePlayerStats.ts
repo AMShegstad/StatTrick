@@ -26,7 +26,7 @@ async function updatePlayerStats() {
         };
         // Insert or update stats in the player_stats table
         await PlayerStats.upsert(statData);
-        console.log(`✅ Successfully updated stats for ${player.first_name} ${player.last_name}`);
+        //console.log(`✅ Successfully updated stats for ${player.first_name} ${player.last_name}`);
       } catch (error) {
         console.error(`:x: Error fetching stats for player ID: ${player.player_id}`, error);
       }

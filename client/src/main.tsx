@@ -36,7 +36,7 @@ const router = createBrowserRouter([{
         onLoginSuccess={() => {}} 
         onShowRegister={() => {}} 
       />,
-      element: <LoginPage showModal={false} setShowModal={() => {}} onLoginSuccess={() => {}} />,
+      //element: <LoginPage showModal={false} setShowModal={() => {}} onLoginSuccess={() => {}} />,
     },
     {
       path: '/register',

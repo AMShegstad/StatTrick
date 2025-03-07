@@ -1,31 +1,20 @@
-import express from 'express';
-import cors from 'cors';
-import { playerRoutes } from './api/player-routes.js';
-import { userRouter } from './api/user-routes.js';
-import favoriteRoutes from './api/favorite-routes.js';
-import oddsRoutes from './api/oddsRoutes.js';
-import authRoutes from './authRoutes.js';
-import { teamRoutes } from './api/teams-routes.js';
+import { Router} from 'express';
+//import cors from 'cors';
 
-const app = express();
+import apiRoutes from './api/index.js';
+// export const routes = express.Router();
+const router = Router();
 const PORT = process.env.PORT || 3001;
 
 // Apply Middleware BEFORE Routes
-app.use(cors({
-  origin: 'http://localhost:5173', // Allow frontend requests
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
-}));
+// router.use(cors({
+//   origin: 'http://localhost:5173', // Allow frontend requests
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'],
+// }));
 
-app.use(express.json()); // ✅ Parses JSON request bodies
-app.use(express.urlencoded({ extended: true })); // ✅ Parses URL-encoded bodies
+router.use('/api', apiRoutes);
 
-// Attach Routes AFTER Middleware
-app.use('/api/players', playerRoutes);
-app.use('/api/users', userRouter);
-app.use('/api/favorites', favoriteRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/odds', oddsRoutes);
-app.use('/api/teams', teamRoutes);
+export default { router, apiRoutes ,PORT };
 
-export { app, PORT };
+

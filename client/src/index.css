@@ -66,3 +66,237 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* 
+Contains team colors for every current team in the league as Hex code values.
+They are identified by their team name and the colors are stored as CSS variables.
+Team city names are capitalized and are classes, not IDs.
+*/
+
+.Boston {
+  --color-1: #FFB81C;
+  --color-2: #000000;
+  --color-3: #FFFFFF;
+  --color-4: #ADAFAA;
+  }
+  
+  .Buffalo {
+  --color-1: #003087;
+  --color-2: #FFB81C;
+  --color-3: #FFFFFF;
+  --color-4: #ADAFAA;
+  }
+  
+  .Detroit {
+  --color-1: #CE1126;
+  --color-2: #FFFFFF;
+  --color-3: #ADAFAA;
+  --color-4: #000000;
+  }
+  .Florida {
+  --color-1: #041E42;
+  --color-2: #C8102E;
+  --color-3: #B9975B;
+  --color-4: #FFFFFF;
+  }
+  
+  .Montreal {
+  --color-1: #AF1E2D;
+  --color-2: #192168;
+  --color-3: #ADAFAA;
+  --color-4: #FFFFFF;
+  }
+  
+  .Ottowa {
+  --color-1: #000000;
+  --color-2: #DA1A32;
+  --color-3: #B79257;
+  --color-4: #FFFFFF;
+  }
+  
+  .TampaBay {
+  --color-1: #002868;
+  --color-2: #FFFFFF;
+  --color-3: #ADAFAA;
+  --color-4: #000000;
+  }
+  
+  .Toronto {
+  --color-1: #00205B;
+  --color-2: #FFFFFF;
+  --color-3: #000000;
+  --color-4: #ADAFAA;
+  }
+  
+  .Carolina {    
+  --color-1: #CE1126;
+  --color-2: #FFFFFF;
+  --color-3: #A4A9AD;
+  --color-4: #000000;
+  }
+  
+  .Columbus {
+  --color-1: #002654;
+  --color-2: #CE1126;
+  --color-3: #A4A9AD;
+  --color-4: #FFFFFF;
+  }
+  
+  .NewJersey {
+  --color-1: #CE1126;
+  --color-2: #000000;
+  --color-3: #FFFFFF;
+  --color-4: #ADAFAA;
+  }
+  
+  .NewYorkI {
+  --color-1: #00539B;
+  --color-2: #F47D30;
+  --color-3: #FFFFFF;
+  --color-4: #ADAFAA;
+  }
+  
+  .NewYorkR {
+  --color-1: #0038A8;
+  --color-2: #CE1126;
+  --color-3: #FFFFFF;
+  --color-4: #000000;
+  }
+  
+  .Philadelphia {
+  --color-1: #f74902;
+  --color-2: #000000;
+  --color-3: #FFFFFF;
+  --color-4: #ADAFAA;
+  }
+  
+  .Pittsburgh {
+  --color-1: #000000;
+  --color-2: #CFC493;
+  --color-3: #FCB514;
+  --color-4: #FFFFFF;
+  }
+  
+  .Washington {
+  --color-1: #041E42;
+  --color-2: #C8102E;
+  --color-3: #FFFFFF;
+  --color-4: #000000;
+  }
+  
+  .Chicago {
+  --color-1: #CF0A2C;
+  --color-2: #000000;
+  --color-3: #FFFFFF;
+  --color-4: #D18A00;
+  }
+  
+  .Colorado {
+  --color-1: #6F263D;
+  --color-2: #236192;
+  --color-3: #A2AAAD;
+  --color-4: #000000;
+  }
+  
+  .Dallas {
+  --color-1: #006847;
+  --color-2: #8F8F8C;
+  --color-3: #111111;
+  --color-4: #FFFFFF;
+  }
+  
+  .Minnesota {
+  --color-1: #A6192E;
+  --color-2: #154374;
+  --color-3: #EAAA00;
+  --color-4: #DDCBA4;
+  }
+  
+  .Nashville {
+  --color-1: #FFB81C;
+  --color-2: #041E42;
+  --color-3: #FFFFFF;
+  --color-4: #000000;
+  }
+  
+  .StLouis {
+  --color-1: #002F87;
+  --color-2: #FCB514;
+  --color-3: #041E42;
+  --color-4: #FFFFFF;
+  }
+  
+  .Utah {
+  --color-1: #010101;
+  --color-2: #6983E7;
+  --color-3: #FFFFFF;
+  --color-4: #A2AAAD;
+  }
+  
+  .Winnipeg {
+  --color-1: #041E42;
+  --color-2: #AC162C;
+  --color-3: #7B303E;
+  --color-4: #55565A;
+  }
+  
+  .Anaheim {
+  --color-1: #F47A38;
+  --color-2: #B9975B;
+  --color-3: #C1C6C8;
+  --color-4: #000000;
+  }
+  
+  .Calgary {
+  --color-1: #D2001C;
+  --color-2: #FAAF19;
+  --color-3: #FFFFFF;
+  --color-4: #D3D3D3;
+  }
+  
+  .Edmonton {
+  --color-1: #041E42;
+  --color-2: #FF4C00;
+  --color-3: #FFFFFF;
+  --color-4: #808080;
+  }
+  
+  .LosAngeles {
+  --color-1: #111111;
+  --color-2: #A2AAAD;
+  --color-3: #FFFFFF;
+  --color-4: #000000;
+  }
+  
+  .SanJose {
+  --color-1: #006D75;
+  --color-2: #EA7200;
+  --color-3: #000000;
+  --color-4: #FFFFFF;
+  }
+  
+  .Seattle {
+  --color-1: #001628;
+  --color-2: #99D9D9;
+  --color-3: #68A2B9;
+  --color-4: #E9072B;
+  }
+  
+  .Vancouver {
+  --color-1: #00205B;
+  --color-2: #00843D;
+  --color-3: #041C2C;
+  --color-4: #99999A;
+  }
+  
+  .Vegas {
+  --color-1: #B4975A;
+  --color-2: #333F42;
+  --color-3: #C8102E;
+  --color-4: #000000;
+  }
+  
+  body {
+      background-color: var(--color-1);
+      color: var(--color-2);
+    }
