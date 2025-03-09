@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3001;
 
 // Apply Middleware BEFORE Routes
 app.use(cors({
-  origin: 'http://localhost:5173', // Allow frontend requests
+  origin: 'http://localhost:3000', // Allow frontend requests from localhost
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -30,4 +30,4 @@ app.use('/api/odds', oddsRoutes);
 app.use('/api/teams', teamRoutes);
 app.use('/api/roster-stats', rosterStatRoutes);
 
-export { app, PORT };
+export { app, PORT};
