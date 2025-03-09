@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3001;
 
 // Apply Middleware BEFORE Routes
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow frontend requests from localhost
+  origin: 'https://stattrick.onrender.com', // Allow frontend requests from localhost
 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
