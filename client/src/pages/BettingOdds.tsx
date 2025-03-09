@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from "@mui/material";
+
 interface BettingOddsProps {
   odds: { commence_time: string; matchup: string; home_odds: number; away_odds: number }[];
 }
+
 const BettingOdds: React.FC<BettingOddsProps> = ({ odds }) => {
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
@@ -32,16 +34,19 @@ const BettingOdds: React.FC<BettingOddsProps> = ({ odds }) => {
     </Container>
   );
 };
+
 const BettingOddsContainer: React.FC = () => {
   const [bettingOdds, setBettingOdds] = useState<{ commence_time: string; matchup: string; home_odds: number; away_odds: number }[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchOdds = async () => {
       try {
         const response = await fetch('/api/odds');
-        console.log('fetchOdds response sent...');
+        if (!response.ok) {
+          throw new Error(`Error fetching odds: ${response.status} - ${response.statusText}`);
+        }
         const result = await response.json();
-        console.log('fetchOdds response received:', result);
-        console.log(result);
         const formattedOdds = result.map((game: any) => ({
           commence_time: game.commence_time,
           matchup: `${game.home_team} vs. ${game.away_team}`,
@@ -51,10 +56,18 @@ const BettingOddsContainer: React.FC = () => {
         setBettingOdds(formattedOdds);
       } catch (error) {
         console.error('Error fetching betting odds:', error);
+        setError('Failed to load betting odds. Please try again later.');
       }
     };
     fetchOdds();
   }, []);
-  return <BettingOdds odds={bettingOdds} />;
+
+  return (
+    <Container>
+      {error && <Typography color="error">{error}</Typography>}
+      <BettingOdds odds={bettingOdds} />
+    </Container>
+  );
 };
+
 export default BettingOddsContainer;

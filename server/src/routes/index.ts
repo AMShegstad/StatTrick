@@ -13,7 +13,8 @@ const PORT = process.env.PORT || 3001;
 
 // Apply Middleware BEFORE Routes
 app.use(cors({
-  origin: 'https://stattrick.onrender.com/', // Allow frontend requests
+  origin: 'https://stattrick.onrender.com', // Allow frontend requests from localhost
+
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -30,4 +31,4 @@ app.use('/api/odds', oddsRoutes);
 app.use('/api/teams', teamRoutes);
 app.use('/api/roster-stats', rosterStatRoutes);
 
-export { app, PORT };
+export { app, PORT};
