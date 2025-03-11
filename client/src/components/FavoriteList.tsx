@@ -43,6 +43,7 @@ const FavoritesList: React.FC = () => {
       .get(`/api/favorites/${user.id}`)
       .then((response) => {
         setFavoritePlayers(response.data);
+        console.log('Favorite players:', response.data);
         setLoading(false);
 
         // Fetch stats for each favorite player

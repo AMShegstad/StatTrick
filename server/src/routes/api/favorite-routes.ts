@@ -28,7 +28,11 @@ router.get('/:id', async (req, res) => {
     }
     catch (error) {
         console.error('Error getting user favorites:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        if (error instanceof Error) {
+            res.status(500).send(error.message);
+        } else {
+            res.status(500).send('An unknown error occurred');
+        }
     }
 });
 
