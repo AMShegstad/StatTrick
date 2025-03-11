@@ -32,7 +32,7 @@ export function UserFavoritesFactory(sequelize: Sequelize): typeof UserFavorites
     {
       sequelize,
       tableName: 'user_favorites',
-      timestamps: true,
+      timestamps: false,
     }
   );
 
