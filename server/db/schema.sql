@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS players (
 
 
 CREATE TABLE IF NOT EXISTS user_favorites (
-    id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
     player_id INTEGER NOT NULL,
     PRIMARY KEY (id, player_id),  -- Composite primary key (userID + playerID)
     FOREIGN KEY (id) REFERENCES user_data(id) ON DELETE CASCADE,
