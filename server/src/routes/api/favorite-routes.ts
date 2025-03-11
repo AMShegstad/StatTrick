@@ -50,7 +50,7 @@ router.post('/:id/:player_id', async (req, res) => {
 
       // Insert into user_favorites table using UserFavorite model
       await UserFavorites.create({
-          id: user.id,  // Ensure you're using the correct field name
+          user_id: user.id,  // Ensure you're using the correct field name
           player_id: player.player_id  // Ensure correct field for player ID
       });
 
