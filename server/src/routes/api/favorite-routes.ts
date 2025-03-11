@@ -3,6 +3,35 @@ import { User, Player, UserFavorites } from '../../models/index.js';
 
 const router = express.Router();
 
+// GET /favorites/:id - Get user's favorite players
+router.get('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const user = await User.findByPk(id, {
+            include: {
+                model: Player,
+                as: 'favoritePlayers',
+                through: {
+                    attributes: []
+                }
+            }
+        });
+
+        if (!user) {
+            res.status(404).json({ message: 'User not found' });
+            return;
+        }
+
+        const favoritePlayers = await user.getFavoritePlayers();
+        res.status(200).json(favoritePlayers);
+    }
+    catch (error) {
+        console.error('Error getting user favorites:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
 // POST /favorites/:id/:player_id - Add player to favorites
 router.post('/:id/:player_id', async (req, res) => {
   const { id, player_id } = req.params;

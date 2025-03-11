@@ -14,15 +14,15 @@ const UserFavorites = UserFavoritesFactory(sequelize);
 // Define Many-to-Many relationship for favorites
 User.belongsToMany(Player, {
     through: UserFavorites,
-    foreignKey: 'id',  // This refers to the `id` field in `UserFavorites`
+    foreignKey: 'user_id',  // This refers to the `id` field in `UserFavorites`
     otherKey: 'player_id',  // This refers to the `player_id` field in `UserFavorites`
-    as: 'favorite_players',  // Alias for the relationship
+    as: 'favoritePlayers',  // Alias for the relationship
   });
   
   Player.belongsToMany(User, {
     through: UserFavorites,
     foreignKey: 'player_id',  // This refers to the `player_id` field in `UserFavorites`
-    otherKey: 'id',  // This refers to the `id` field in `UserFavorites`
+    otherKey: 'user_id',  // This refers to the `id` field in `UserFavorites`
     as: 'favoritedByUsers',  // Alias for the relationship
   });
 

@@ -5,9 +5,17 @@ import AuthService from '../utils/auth'; // Import AuthService
 
 interface Player {
   id: number;
+  headshot: string;
+  sweater_number: number;
   first_name: string;
   last_name: string;
   team_abbreviation: string;
+  goals: number;
+  assists: number;
+  points: number;
+  plus_minus: number;
+  save_pctg: number;
+  goals_against_avg: number;
 }
 
 const FavoritesList: React.FC = () => {
@@ -50,14 +58,17 @@ const FavoritesList: React.FC = () => {
       <thead>
         <tr>
           <th>Team</th>
+          <th>Photo</th>
           <th>Player</th>
         </tr>
       </thead>
       <tbody>
         {favoritePlayers.map((player) => (
           <tr key={player.id}>
-            <td>{player.team_abbreviation}</td>
+            <td>{player.team_abbreviation} #{player.sweater_number}</td>
+            <td><img alt='player photo' style={{height: '10%', width:"10%"}} src={player.headshot} /></td>
             <td>{player.first_name} {player.last_name}</td>
+            
           </tr>
         ))}
       </tbody>
