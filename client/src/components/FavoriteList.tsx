@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import axios from 'axios';
 import AuthService from '../utils/auth'; // Import AuthService
+import { Button } from 'react-bootstrap';
+
 
 interface Player {
   player_id: number;
@@ -69,6 +71,29 @@ const FavoritesList: React.FC = () => {
       });
   }, []);
 
+  const removeFavoritePlayer = (player_id: number) => {
+    const user = AuthService.getProfile(); // Get the current user's profile
+    if (!user || !user.id) {
+      alert('You need to be logged in to remove favorites.');
+      return;
+    }
+
+    // Make DELETE request to backend
+    axios
+      .delete(`/api/favorites/${user.id}/${player_id}`)
+      .then(() => {
+        // Remove player from the favoritePlayers list in the frontend
+        setFavoritePlayers((prevPlayers) =>
+          prevPlayers.filter((player) => player.player_id !== player_id)
+        );
+        alert('Player removed from favorites!');
+      })
+      .catch((error) => {
+        console.error('Error removing player from favorites:', error);
+        alert('Failed to remove player from favorites.');
+      });
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -91,6 +116,7 @@ const FavoritesList: React.FC = () => {
           <th>+\-</th>
           <th>Save Percentage</th>
           <th>Goals Against Average</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -106,6 +132,7 @@ const FavoritesList: React.FC = () => {
             <td>{playerStats[player.player_id]?.plus_minus || 'N/A'}</td>
             <td>{playerStats[player.player_id]?.save_pctg || 'N/A'}</td>
             <td>{playerStats[player.player_id]?.goals_against_avg || 'N/A'}</td>
+            <td><Button variant="danger" onClick={() => removeFavoritePlayer(player.player_id)}>Remove</Button></td>
           </tr>
         ))}
       </tbody>
